@@ -154,6 +154,90 @@ img {
   background-color: var(--bg-gray);
 }
 
+/* Mobile Hover Smoothness Adjustment */
+@media (max-width: 768px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn:hover, .btn-primary:hover, .btn-secondary:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  .about-stat-box:hover, .pcard:hover {
+    transform: translateY(-2px) !important; /* Milder jump on touch screens */
+  }
+  .learn-more:hover {
+    gap: 8px !important;
+  }
+}
+
+/* ==========================================
+   Stats Counter Parallax
+========================================== */
+.stats-counter {
+  position: relative;
+  background-image: url('https://images.unsplash.com/photo-1541888082470-fa4ca4515aff?q=80&w=1920&auto=format&fit=crop');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 100px 0;
+  color: #fff;
+}
+
+.stats-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(46, 62, 48, 0.85); /* Primary color overlay */
+  z-index: 1;
+}
+
+.stats-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  text-align: center;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-icon {
+  font-size: 3rem;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+}
+
+.counter-wrap {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+}
+
+.counter-wrap h3 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.stat-item p {
+  font-size: 1.1rem;
+  margin-top: 5px;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 1px;
+}
+
+
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   color: var(--text-main);
