@@ -446,6 +446,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 10. Hero Image Auto-Slider
+    const heroSlides = document.querySelectorAll('.hero-slide');
+    const heroDots = document.querySelectorAll('.hero-slider-dots .dot');
+    let currentSlide = 0;
+    
+    if (heroSlides.length > 0) {
+        const showSlide = (index) => {
+            heroSlides.forEach(slide => slide.classList.remove('active'));
+            heroDots.forEach(dot => dot.classList.remove('active'));
+            
+            heroSlides[index].classList.add('active');
+            heroDots[index].classList.add('active');
+            currentSlide = index;
+        };
+
+        const nextSlide = () => {
+            const next = (currentSlide + 1) % heroSlides.length;
+            showSlide(next);
+        };
+
+        // Auto slide every 4 seconds
+        let slideInterval = setInterval(nextSlide, 4000);
+
+        // Dot click interactions
+        heroDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                clearInterval(slideInterval);
+                showSlide(index);
+                slideInterval = setInterval(nextSlide, 4000); // restart timer
+            });
+        });
+    }
+
 });
 
 
