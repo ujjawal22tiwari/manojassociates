@@ -32,10 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1.5 Theme Toggle Logic
     const themeToggleBtn = document.getElementById('theme-toggle');
     const themeIcon = themeToggleBtn.querySelector('i');
-    
+
     // Check local storage for theme preference
     const currentTheme = localStorage.getItem('theme') || 'dark';
-    
+
     if (currentTheme === 'light') {
         document.documentElement.setAttribute('data-theme', 'light');
         themeIcon.classList.remove('fa-moon');
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     themeToggleBtn.addEventListener('click', () => {
         let theme = document.documentElement.getAttribute('data-theme');
-        
+
         if (theme === 'light') {
             document.documentElement.setAttribute('data-theme', 'dark');
             localStorage.setItem('theme', 'dark');
@@ -60,18 +60,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Sticky Navbar Effect on Scroll
     const header = document.querySelector('.header');
-    
+
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
-        
+
         // Active link switching based on scroll position
         let current = '';
         const sections = document.querySelectorAll('section');
-        
+
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         counters.forEach(counter => {
             const target = +counter.getAttribute('data-target');
             // Duration logic
-            const speed = 200; 
+            const speed = 200;
             const updateCount = () => {
                 const current = +counter.innerText;
                 const inc = target / speed;
@@ -120,48 +120,48 @@ document.addEventListener('DOMContentLoaded', () => {
         const [entry] = entries;
         if (entry.isIntersecting && !hasAnimated) {
             animateCounters();
-            hasAnimated = true; 
+            hasAnimated = true;
         }
     }, {
         root: null,
-        threshold: 0.5 
+        threshold: 0.5
     });
 
-    if(statsSection) {
+    if (statsSection) {
         observer.observe(statsSection);
     }
-    
+
     // 4. Contact Form Submit Prevention (Demo)
     const contactForm = document.getElementById('contactForm');
-    if(contactForm) {
+    if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const btn = contactForm.querySelector('button');
             const originalText = btn.innerHTML;
-            
+
             btn.innerHTML = 'Sending... <i class="fa-solid fa-spinner fa-spin"></i>';
             btn.style.opacity = '0.8';
-            
+
             // Simulate network request
             setTimeout(() => {
                 btn.innerHTML = 'Message Sent! <i class="fa-solid fa-check"></i>';
-                btn.style.borderColor = '#9fb36d'; 
+                btn.style.borderColor = '#9fb36d';
                 btn.style.opacity = '1';
                 contactForm.reset();
-                
+
                 // Revert button back after a few seconds
                 setTimeout(() => {
                     btn.innerHTML = originalText;
                     btn.style.borderColor = '';
                 }, 3000);
-                
+
             }, 1500);
         });
     }
 
     // 5. Scroll Animations (Intersection Observer)
     const fadeElements = document.querySelectorAll('.animate-on-scroll');
-    
+
     const fadeObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -180,23 +180,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // 6. View Archive Toggling
     const viewArchiveBtn = document.getElementById('view-archive-btn');
     const archivedProjects = document.querySelectorAll('.archived-project');
-    
-    if(viewArchiveBtn && archivedProjects.length > 0) {
+
+    if (viewArchiveBtn && archivedProjects.length > 0) {
         let isArchiveVisible = false;
-        
+
         viewArchiveBtn.addEventListener('click', (e) => {
             e.preventDefault(); // Prevent jump to top
             isArchiveVisible = !isArchiveVisible;
-            
+
             archivedProjects.forEach(project => {
-                if(isArchiveVisible) {
+                if (isArchiveVisible) {
                     project.classList.add('show');
                 } else {
                     project.classList.remove('show');
                 }
             });
-            
-            if(isArchiveVisible) {
+
+            if (isArchiveVisible) {
                 viewArchiveBtn.innerHTML = 'HIDE ARCHIVE &nbsp;<i class="fa-solid fa-arrow-up"></i>';
             } else {
                 viewArchiveBtn.innerHTML = 'VIEW ARCHIVE &nbsp;<i class="fa-solid fa-arrow-right"></i>';
@@ -251,19 +251,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalOverlay = document.getElementById('service-modal');
     const modalCloseBtn = document.getElementById('modal-close-btn');
     const modalBody = document.getElementById('modal-body-content');
-    
+
     // Select all buttons that trigger the modal (both services and projects)
     const learnMoreBtns = document.querySelectorAll('.learn-more.btn-link, .portfolio-action');
 
     // Open Modal
-    if(modalOverlay && learnMoreBtns.length > 0) {
+    if (modalOverlay && learnMoreBtns.length > 0) {
         learnMoreBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 const id = btn.getAttribute('data-id');
                 const data = modalData[id];
-                
-                if(data) {
+
+                if (data) {
                     // Build features HTML
                     let featuresHtml = '';
                     data.features.forEach(feat => {
@@ -391,11 +391,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewButtons = document.querySelectorAll(".view-details-btn");
 
     if (projectModal && viewButtons.length > 0) {
-        
+
         viewButtons.forEach(btn => {
             btn.addEventListener("click", (e) => {
                 const card = btn.closest(".pcard");
-                
+
                 // Extract data from card attributes
                 const title = card.getAttribute("data-title");
                 const client = card.getAttribute("data-client");
@@ -432,7 +432,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = "";
         };
 
-        if(closeProjectBtn) closeProjectBtn.addEventListener("click", closeModal);
+        if (closeProjectBtn) closeProjectBtn.addEventListener("click", closeModal);
 
         projectModal.addEventListener("click", (e) => {
             if (e.target === projectModal) closeModal();
@@ -450,12 +450,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroSlides = document.querySelectorAll('.hero-slide');
     const heroDots = document.querySelectorAll('.hero-slider-dots .dot');
     let currentSlide = 0;
-    
+
     if (heroSlides.length > 0) {
         const showSlide = (index) => {
             heroSlides.forEach(slide => slide.classList.remove('active'));
             heroDots.forEach(dot => dot.classList.remove('active'));
-            
+
             heroSlides[index].classList.add('active');
             heroDots[index].classList.add('active');
             currentSlide = index;
@@ -478,10 +478,214 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+    // 11. Mobile Touch Support for Project Card Overlays
+    // On touch devices, tap a card image area to reveal the overlay button
+    const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
+
+    if (isTouchDevice()) {
+        const allPcards = document.querySelectorAll('.pcard');
+        let currentlyOpenCard = null;
+
+        allPcards.forEach(card => {
+            const imageArea = card.querySelector('.pcard-image');
+            if (!imageArea) return;
+
+            imageArea.addEventListener('touchstart', (e) => {
+                // Let VIEW DETAILS button tap go through normally
+                if (e.target.closest('.view-details-btn')) return;
+
+                e.preventDefault();
+                if (currentlyOpenCard && currentlyOpenCard !== card) {
+                    currentlyOpenCard.classList.remove('touch-active');
+                }
+                card.classList.toggle('touch-active');
+                currentlyOpenCard = card.classList.contains('touch-active') ? card : null;
+            }, { passive: false });
+        });
+
+        // Tap outside any card → close overlay
+        document.addEventListener('touchstart', (e) => {
+            if (!e.target.closest('.pcard') && currentlyOpenCard) {
+                currentlyOpenCard.classList.remove('touch-active');
+                currentlyOpenCard = null;
+            }
+        });
+    }
 
 });
 
 
 
 
- 
+
+(function () {
+    // City display names
+    const cityLabels = {
+        lucknow: 'Lucknow, Uttar Pradesh',
+        noida: 'Noida / Jewar, UP',
+        gonda: 'Gonda, Uttar Pradesh',
+        delhi: 'Delhi NCR',
+        pune: 'Pune, Maharashtra',
+        palghar: 'Palghar, Maharashtra',
+        bhopal: 'Bhopal, Madhya Pradesh',
+        patna: 'Patna, Bihar',
+        chennai: 'Chennai, Tamil Nadu'
+    };
+
+    // Gather all pcards by city at runtime (trusts data-city attribute)
+    function getProjectsByCity(cityKey) {
+        const all = document.querySelectorAll(`.pcard[data-city="${cityKey}"]`);
+        return Array.from(all).map(card => ({
+            title: (card.getAttribute('data-title') || '').trim(),
+            client: (card.getAttribute('data-client') || '').trim(),
+            status: (card.getAttribute('data-status') || '').trim(),
+            sector: (card.getAttribute('data-sector') || '').trim(),
+            el: card
+        }));
+    }
+
+    // Open existing project modal using the card's VIEW DETAILS btn
+    function openProjectModal(cardEl) {
+        // First reset all filters to "all" so the card is visible
+        const dropdown = document.getElementById('project-dropdown');
+        if (dropdown) {
+            const allItem = dropdown.querySelector('.dropdown-menu li[data-filter="all"]');
+            if (allItem) allItem.click();
+        }
+        // Find and click the view-details btn on that card
+        const btn = cardEl.querySelector('.view-details-btn');
+        if (btn) btn.click();
+        // Scroll to projects section so user can see context
+        const projectsSection = document.getElementById('projects');
+        if (projectsSection) {
+            projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(() => { if (btn) btn.click(); }, 600);
+        }
+    }
+
+    // Show projects panel for a city
+    function showCityPanel(cityKey) {
+        const emptyEl = document.getElementById('mpp-empty');
+        const contentEl = document.getElementById('mpp-content');
+        const cityNameEl = document.getElementById('mpp-city-name');
+        const countEl = document.getElementById('mpp-project-count');
+        const listEl = document.getElementById('mpp-projects-list');
+
+        if (!cityKey) {
+            emptyEl.style.display = 'flex';
+            contentEl.style.display = 'none';
+            return;
+        }
+
+        const projects = getProjectsByCity(cityKey);
+
+        if (!projects.length) {
+            emptyEl.style.display = 'flex';
+            contentEl.style.display = 'none';
+            return;
+        }
+
+        cityNameEl.textContent = cityLabels[cityKey] || cityKey;
+        countEl.textContent = `${projects.length} Project${projects.length > 1 ? 's' : ''}`;
+
+        // Sector icon map
+        const sectorIcons = {
+            metro: 'fa-train-subway',
+            tunnel: 'fa-circle-dot',
+            casting: 'fa-industry',
+            architectural: 'fa-building-columns',
+            civil: 'fa-hard-hat',
+            transport: 'fa-truck'
+        };
+
+        listEl.innerHTML = projects.map((p, i) => {
+            const statusClass = p.status.toLowerCase().includes('progress') ? 'ongoing' : 'completed';
+            const statusLabel = p.status.toLowerCase().includes('progress') ? 'In Progress' : 'Completed';
+            const icon = sectorIcons[p.sector.toLowerCase()] || 'fa-folder-open';
+            return `
+                    <button class="mpp-project-btn" data-proj-index="${i}" data-city="${cityKey}">
+                        <div class="mpp-proj-icon"><i class="fa-solid ${icon}"></i></div>
+                        <div class="mpp-proj-info">
+                            <div class="mpp-proj-title">${p.title || 'Project Details'}</div>
+                            <div class="mpp-proj-meta">${p.client || ''}</div>
+                        </div>
+                        <span class="mpp-proj-status ${statusClass}">${statusLabel}</span>
+                        <i class="fa-solid fa-chevron-right mpp-proj-arrow"></i>
+                    </button>
+                `;
+        }).join('');
+
+        // Attach click handlers
+        listEl.querySelectorAll('.mpp-project-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const idx = parseInt(btn.getAttribute('data-proj-index'));
+                const city = btn.getAttribute('data-city');
+                const projs = getProjectsByCity(city);
+                if (projs[idx]) openProjectModal(projs[idx].el);
+            });
+        });
+
+        emptyEl.style.display = 'none';
+        contentEl.style.display = 'block';
+    }
+
+    // Activate pin
+    function activatePin(cityKey) {
+        document.querySelectorAll('.map-pin').forEach(p => p.classList.remove('active'));
+        if (cityKey) {
+            const pin = document.querySelector(`.map-pin[data-city="${cityKey}"]`);
+            if (pin) pin.classList.add('active');
+        }
+    }
+
+    // ── Custom dropdown ──
+    const customSelect = document.getElementById('map-custom-select');
+    const trigger = document.getElementById('map-select-trigger');
+    const selectLabel = document.getElementById('map-select-label');
+    const options = document.getElementById('map-select-options');
+
+    trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        customSelect.classList.toggle('open');
+    });
+    document.addEventListener('click', () => customSelect.classList.remove('open'));
+
+    options.querySelectorAll('li').forEach(li => {
+        li.addEventListener('click', () => {
+            const city = li.getAttribute('data-city');
+            selectLabel.textContent = li.textContent;
+            options.querySelectorAll('li').forEach(o => o.classList.remove('active'));
+            li.classList.add('active');
+            customSelect.classList.remove('open');
+            activatePin(city);
+            showCityPanel(city);
+        });
+    });
+
+    // ── Pin click events ──
+    document.querySelectorAll('.map-pin').forEach(pin => {
+        pin.addEventListener('click', function () {
+            const city = this.getAttribute('data-city');
+            activatePin(city);
+            showCityPanel(city);
+            // Sync dropdown label
+            const matchLi = options.querySelector(`li[data-city="${city}"]`);
+            if (matchLi) {
+                selectLabel.textContent = matchLi.textContent;
+                options.querySelectorAll('li').forEach(o => o.classList.remove('active'));
+                matchLi.classList.add('active');
+            }
+        });
+    });
+
+    // ── Close button ──
+    document.getElementById('mpp-close').addEventListener('click', () => {
+        showCityPanel(null);
+        activatePin(null);
+        selectLabel.textContent = 'All Cities';
+        options.querySelectorAll('li').forEach(o => o.classList.remove('active'));
+        const allLi = options.querySelector('li[data-city=""]');
+        if (allLi) allLi.classList.add('active');
+    });
+
+})();
