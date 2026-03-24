@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalData = {
         metro: {
             title: "Metro Rail & Tunneling Engineering",
-            image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=1000&auto=format&fit=crop",
+            image: "Pune Metro Segment Transportation.png",
             desc: "We specialize in the complex engineering required for urban rapid transit systems. From deep tunnel excavation using TBMs to the structural development of multi-level underground stations, our expertise ensures timely delivery of critical metro corridors.",
             features: [
                 { title: "TBM Excavation", text: "Precision tunneling using state-of-the-art Tunnel Boring Machines for dense urban environments." },
@@ -689,3 +689,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 })();
+
+
+
+
+const form = document.getElementById("contactForm");
+
+form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const data = new FormData(form);
+
+    const res = await fetch(" https://formspree.io/f/xojkgrol", {
+        method: "POST",
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+    });
+
+    if (res.ok) {
+        alert("✅ Inquiry Submitted Successfully!");
+        form.reset();
+    } else {
+        alert("❌ Something went wrong!");
+    }
+});

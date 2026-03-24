@@ -466,8 +466,8 @@ h6 {
 }
 
 .logo-box {
-  width: 320px;
-  height: 65px;
+  width: 160px;
+  height: 60px;
   color: var(--text-dark);
   display: flex;
   align-items: center;
@@ -708,7 +708,7 @@ h6 {
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 1s ease;
 }
 
 .hero-slider-dots .dot.active,

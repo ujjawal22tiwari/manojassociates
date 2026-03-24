@@ -34,7 +34,7 @@
     <header class="header">
         <div class="container navbar">
             <a href="#" class="logo">
-                <div class="logo-box"><img src="newlogo.png"></div>
+                <div class="logo-box"><img src="clients/manoj_associates_160x60.png"></div>
                 <div class="logo-text">
                     <!-- <span class="logo-name">Manoj Associates </span>
                     <span class="logo-sub">Construction Excellence</span> -->
@@ -77,12 +77,17 @@
         <div class="hero-right">
             <div class="hero-image-pane hero-slider">
                 <div class="hero-slides">
-                    <img class="hero-slide active" src="homeSlider/2ndimg.jpeg" alt="Lucknow Metro">
-                    <img class="hero-slide" src="homeSlider/1stimg.jpeg" alt="Delhi Metro">
-                    <img class="hero-slide" src="homeSlider/3rdimg.jpeg" alt="GMLR Tunnel">
-                    <img class="hero-slide" src="homeSlider/4thimg.jpeg" alt="Pune Metro">
-                    <img class="hero-slide" src="homeSlider/5thimg.jpeg" alt="Airport">
+                    <img class="hero-slide active" src="airport.png" alt="Lucknow Metro">
+                    <img class="hero-slide" src="Pune Metro Finishing Works.png" alt="Delhi Metro">
+                    <img class="hero-slide" src="Pune Metro Basalt Cladding Work.png" alt="GMLR Tunnel">
+                    <img class="hero-slide" src="Khadki Metro ACP Work.png" alt="Pune Metro">
+                    <img class="hero-slide" src="Gonda Hospital Infrastructure Work.png" alt="Airport">
                     <img class="hero-slide" src="taj.png" alt="Taj Hotel">
+                    <img class="hero-slide" src="Lucknow Metro Civil Works.png" alt="Taj Hotel">
+                    <img class="hero-slide" src="punemetro.png" alt="Taj Hotel">
+                    <img class="hero-slide" src="Pune Metro Segment Transportation.png" alt="Taj Hotel">
+
+
                 </div>
                 <div class="hero-slider-dots">
                     <span class="dot active" data-slide="0"></span>
@@ -90,7 +95,13 @@
                     <span class="dot" data-slide="2"></span>
                     <span class="dot" data-slide="3"></span>
                     <span class="dot" data-slide="4"></span>
+
                     <span class="dot" data-slide="5"></span>
+                    <span class="dot" data-slide="6"></span>
+                    <span class="dot" data-slide="8"></span>
+
+                    <span class="dot" data-slide="7"></span>
+
                 </div>
             </div>
             <div class="hero-feature-pane">
@@ -714,7 +725,7 @@
                     data-status="Completed" data-location="Patna Casting Yard, Bihar"
                     data-desc="Execution of tunnel segment ring casting at Patna casting yard for Patna Metro Project PC-03. The project involved manufacturing of precast tunnel segments ensuring high precision, structural strength and quality standards for metro tunneling operations.">
                     <div class="pcard-image">
-                        <img src="Tunnel Casting – Patna Metro.png" alt="Tunnel Casting">
+                        <img src="homeSlider/6th.jpeg" alt="Tunnel Casting">
                         <div class="pcard-overlay">
                             <button class="view-details-btn">VIEW DETAILS</button>
                         </div>
@@ -738,7 +749,7 @@
                     data-status="Completed" data-location="Mundka Casting Yard, Delhi"
                     data-desc="Execution of tunnel segment ring casting at Mundka casting yard for Delhi Metro Project DC-09. The project involved manufacturing high-precision precast tunnel segments ensuring durability, structural integrity and compliance with metro infrastructure standards.">
                     <div class="pcard-image">
-                        <img src="delhi.png" alt="Tunnel Casting">
+                        <img src="homeSlider/3rdimg.jpeg" alt="Tunnel Casting">
                         <div class="pcard-overlay">
                             <button class="view-details-btn">VIEW DETAILS</button>
                         </div>
@@ -1213,17 +1224,17 @@
                             <span class="direct-label">General Inquiries</span>
                             <a href="mailto:manojdwivedi@manojassociates.com"
                                 class="direct-link">manojdwivedi@manojassociates.com</a>
-                            <a href="mailto:chandrashukla@manojassociates.com" 
+                            <a href="mailto:chandrashukla@manojassociates.com"
                                 class="direct-link">chandrashukla@manojassociates.com</a>
                             <a href="mailto:amittripathi@manojassociates.com"
                                 class="direct-link">amittripathi@manojassociates.com</a>
-                        </div> 
+                        </div>
                         <div class="direct-item">
                             <span class="direct-label">Call Us Directly</span>
                             <a href="tel:9415005550 " class="direct-link"> <button type="submit"
                                     class="btn btn-primary">
                                     CALL NOW
-                                </button> 
+                                </button>
                             </a>
                         </div>
                         <div class="direct-item">
@@ -1239,7 +1250,7 @@
 
 
                 <!-- EmailJS CDN -->
-                <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+                <!-- <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
                 <script>
                     (function () {
                         emailjs.init("NOXZ5QC3sRMAldKmg");
@@ -1286,21 +1297,58 @@
                         e.preventDefault();
 
                         emailjs.sendForm(
-                            "service_l84q1yf",   // yaha service ID
-                            "template_kxg3h5l",  // yaha template ID
+                            "service_l84q1yf",    
+                            "template_kxg3h5l",   
                             this
-                        )
-                            .then(function () {
-                                alert("✅ Inquiry Sent Successfully!");
-                            }, function (error) {
-                                alert("❌ Failed to send!");
-                                console.log(error);
-                            });
+                        ) 
 
                         this.reset();
                     });
 
-                </script>
+                </script> -->
+
+                
+
+
+                <!-- <form id="contactForm" class="sleek-form"></form> -->
+
+                <form action="https://formspree.io/f/xojkgrol" method="POST" class="sleek-form" id="contactForm">
+
+
+                    <input type="hidden" name="_subject" value="New Inquiry - Manoj Associates">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name="name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Company</label>
+                            <input type="text" name="company" placeholder="Organization">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" placeholder="john@company.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" name="phone" placeholder="+91 XXXXX XXXXX">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Project Details</label>
+                        <textarea name="message" rows="5" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-submit">
+                        SUBMIT INQUIRY
+                    </button>
+
+                </form>
 
 
 
