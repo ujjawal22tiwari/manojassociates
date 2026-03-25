@@ -147,9 +147,7 @@ img {
   padding: 100px 0;
 }
 
-.bg-gray {
-  /* background-color: var(--bg-gray); */
-}
+
 
 /* ==========================================
    Hover Fix: Touch vs Pointer Devices
@@ -3121,5 +3119,231 @@ h6 {
 
   .map-custom-select {
     min-width: 100%;
+  }
+}
+
+/* ==========================================
+   Back To Top Button
+========================================== */
+#back-to-top {
+  position: fixed;
+  bottom: 36px;
+  right: 32px;
+  z-index: 9999;
+
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-color);
+  background: var(--bg-darker);
+  color: var(--accent-color);
+  font-size: 1.1rem;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Hidden by default */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: opacity 0.35s ease, transform 0.35s ease,
+              visibility 0.35s ease, box-shadow 0.3s ease,
+              background 0.3s ease;
+}
+
+#back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#back-to-top:hover {
+  background: var(--accent-color);
+  color: var(--text-dark);
+  box-shadow: 0 6px 24px rgba(159, 179, 109, 0.45);
+  transform: translateY(-4px);
+}
+
+#back-to-top:active {
+  transform: translateY(0px);
+}
+
+/* Mobile — smaller, slightly different position */
+@media (max-width: 600px) {
+  #back-to-top {
+    bottom: 20px;
+    right: 18px;
+    width: 44px;
+    height: 44px;
+    font-size: 1rem;
+  }
+}
+
+/* ==========================================
+   Timeline Section
+========================================== */
+.timeline-section {
+  background-color: var(--bg-darker);
+  padding: 100px 0;
+}
+
+/* The vertical center line */
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 60px auto 0;
+  padding: 0 20px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom,
+    transparent,
+    var(--accent-color) 8%,
+    var(--accent-color) 92%,
+    transparent
+  );
+  transform: translateX(-50%);
+}
+
+/* Each row */
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 56px;
+  position: relative;
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.timeline-item.tl-left {
+  flex-direction: row;           /* card on left, dot on right side of center */
+  transform: translateX(-40px);
+}
+
+.timeline-item.tl-right {
+  flex-direction: row-reverse;   /* card on right, dot on left side of center */
+  transform: translateX(40px);
+}
+
+.timeline-item.tl-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Dot in the center */
+.tl-dot {
+  position: absolute;
+  left: 50%;
+  top: 12px;
+  transform: translateX(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--bg-main);
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  z-index: 2;
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-item:hover .tl-dot {
+  background: var(--accent-color);
+  color: var(--text-dark);
+  box-shadow: 0 0 20px rgba(159, 179, 109, 0.5);
+}
+
+/* Card */
+.tl-card {
+  width: calc(50% - 46px);
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px 28px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.tl-left  .tl-card { margin-right: auto; }
+.tl-right .tl-card { margin-left: auto; }
+
+.timeline-item:hover .tl-card {
+  border-color: rgba(159, 179, 109, 0.35);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  transform: translateY(-3px);
+}
+
+/* Accent card — last milestone */
+.tl-card-accent {
+  border-color: rgba(159, 179, 109, 0.4);
+  background: linear-gradient(135deg,
+    var(--bg-main) 0%,
+    rgba(159, 179, 109, 0.07) 100%
+  );
+}
+
+.tl-year {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  margin-bottom: 8px;
+  font-family: 'Inter', sans-serif;
+}
+
+.tl-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-highlight);
+  margin-bottom: 8px;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.tl-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* ── Mobile: stack vertically ── */
+@media (max-width: 700px) {
+  .timeline::before {
+    left: 22px;
+  }
+
+  .timeline-item,
+  .timeline-item.tl-left,
+  .timeline-item.tl-right {
+    flex-direction: column;
+    padding-left: 60px;
+    transform: translateX(0);
+    opacity: 0;
+  }
+
+  .timeline-item.tl-visible {
+    opacity: 1;
+  }
+
+  .tl-dot {
+    left: 0;
+    top: 0;
+    transform: none;
+  }
+
+  .tl-card {
+    width: 100%;
+    margin: 12px 0 0 0;
   }
 }

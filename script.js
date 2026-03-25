@@ -739,3 +739,43 @@ form.addEventListener("submit", async function (e) {
         alert("❌ Something went wrong!");
     }
 });
+
+/* ── Back To Top Button ── */
+(function () {
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+
+    // Show button after scrolling 400px
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
+        }
+    }, { passive: true });
+
+    // Smooth scroll to top on click
+    btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+})();
+
+/* ── Timeline Scroll Animation ── */
+(function () {
+    const items = document.querySelectorAll('.timeline-item');
+    if (!items.length) return;
+
+    const tlObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                // Slight stagger delay based on position
+                setTimeout(() => {
+                    entry.target.classList.add('tl-visible');
+                }, 100);
+                tlObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    items.forEach(item => tlObserver.observe(item));
+})();

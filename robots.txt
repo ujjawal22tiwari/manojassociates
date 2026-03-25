@@ -1,0 +1,13 @@
+# robots.txt — Manoj Associates
+# Tells search engines which pages to crawl
+
+# Allow all search engine bots
+User-agent: *
+Allow: /
+
+# Block access to internal/private folders
+Disallow: /contact-backend/
+Disallow: /.git/
+
+# Sitemap location — Very important for Google!
+Sitemap: https://www.manojassociates.in/sitemap.xml
