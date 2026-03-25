@@ -2151,12 +2151,87 @@ h6 {
     height: calc(100vh - 70px);
     background-color: var(--bg-main);
     flex-direction: column;
-    align-items: center;
-    padding-top: 40px;
-    gap: 24px;
+    align-items: flex-start;          /* LEFT align for dropdown to work */
+    padding: 28px 24px 40px;
+    gap: 6px;
     transition: var(--transition);
     box-shadow: var(--shadow-md);
     z-index: 1001;
+    overflow-y: auto;
+  }
+
+  /* All top-level nav links on mobile */
+  .nav-links > a {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  /* Dropdown full-width on mobile */
+  .nav-dropdown {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .nav-dropdown-trigger {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1rem;
+    justify-content: space-between;
+  }
+
+  /* Override absolute positioning on mobile */
+  .nav-dropdown-menu {
+    position: static !important;
+    transform: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    border-top: 1px solid var(--border-color) !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 !important;
+    opacity: 0;
+    visibility: visible !important;
+    pointer-events: none;
+    transition: max-height 0.35s ease, opacity 0.3s ease !important;
+    background: var(--bg-darker) !important;
+  }
+
+  .nav-dropdown-menu::before,
+  .nav-dropdown-menu::after { display: none !important; }
+
+  /* Hover should NOT open on mobile — only tap */
+  .nav-dropdown:hover .nav-dropdown-menu {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: none !important;
+  }
+
+  /* Only open when .mobile-open class is set by JS */
+  .nav-dropdown.mobile-open .nav-dropdown-menu {
+    max-height: 400px !important;
+    opacity: 1 !important;
+    padding: 6px 0 !important;
+    pointer-events: all !important;
+  }
+
+  .nav-dropdown.mobile-open .nav-chevron,
+  .nav-dropdown:hover .nav-dropdown.mobile-open .nav-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown item styling on mobile */
+  .nav-dropdown-item {
+    padding: 10px 16px;
+    width: 100%;
+    font-size: 0.92rem;
   }
 
   .header.scrolled .nav-links {
@@ -3347,3 +3422,132 @@ h6 {
     margin: 12px 0 0 0;
   }
 }
+
+/* ==========================================
+   Nav Dropdown — About Menu
+========================================== */
+.nav-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+  color: var(--text-main);
+  font-size: 0.95rem;
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.nav-dropdown-trigger::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--text-main);
+  transition: var(--transition);
+}
+
+.nav-dropdown:hover .nav-dropdown-trigger {
+  color: var(--text-highlight);
+}
+.nav-dropdown:hover .nav-dropdown-trigger::after {
+  width: 100%;
+  background-color: var(--text-highlight);
+}
+
+.nav-chevron {
+  font-size: 0.65rem;
+  transition: transform 0.3s ease;
+}
+.nav-dropdown:hover .nav-chevron {
+  transform: rotate(180deg);
+}
+
+/* Dropdown panel */
+.nav-dropdown-menu {
+  position: absolute;
+  top: 100%;                          /* No gap — starts right below trigger */
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  min-width: 200px;
+  background: var(--header-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 18px 0 8px;               /* top padding = invisible bridge over gap */
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  z-index: 2000;
+}
+
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -7px; left: 50%;
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-bottom-color: var(--border-color);
+  border-top: 0;
+}
+.nav-dropdown-menu::after {
+  content: '';
+  position: absolute;
+  top: -6px; left: 50%;
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-bottom-color: var(--header-bg);
+  border-top: 0;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  transform: translateX(-50%) translateY(4px);  /* slight visual drop */
+}
+
+/* Items */
+.nav-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: background 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
+}
+.nav-dropdown-item + .nav-dropdown-item {
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.nav-dropdown-item i {
+  width: 16px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--accent-color);
+  transition: transform 0.2s ease;
+}
+.nav-dropdown-item:hover {
+  background: rgba(159,179,109,0.1);
+  color: var(--text-highlight);
+  padding-left: 22px;
+}
+.nav-dropdown-item:hover i {
+  transform: scale(1.2);
+}
+
+
+/* Mobile accordion handled in main responsive section above */

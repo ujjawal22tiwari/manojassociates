@@ -10,4 +10,4 @@ Disallow: /contact-backend/
 Disallow: /.git/
 
 # Sitemap location — Very important for Google!
-Sitemap: https://www.manojassociates.in/sitemap.xml
+Sitemap: https://www.manojassociates.com/sitemap.xml

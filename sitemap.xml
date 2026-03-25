@@ -6,7 +6,7 @@
 
   <!-- Homepage — Highest Priority -->
   <url>
-    <loc>https://www.manojassociates.in/</loc>
+    <loc>https://www.manojassociates.com/</loc>
     <lastmod>2026-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -14,7 +14,7 @@
 
   <!-- Awards Page -->
   <url>
-    <loc>https://www.manojassociates.in/awards.html</loc>
+    <loc>https://www.manojassociates.com/awards.html</loc>
     <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -22,28 +22,28 @@
 
   <!-- Section anchors (for Google to index key sections) -->
   <url>
-    <loc>https://www.manojassociates.in/#about</loc>
+    <loc>https://www.manojassociates.com/#about</loc>
     <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://www.manojassociates.in/#projects</loc>
+    <loc>https://www.manojassociates.com/#projects</loc>
     <lastmod>2026-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://www.manojassociates.in/#team</loc>
+    <loc>https://www.manojassociates.com/#team</loc>
     <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://www.manojassociates.in/#contact</loc>
+    <loc>https://www.manojassociates.com/#contact</loc>
     <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

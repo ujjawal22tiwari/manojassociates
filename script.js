@@ -779,3 +779,34 @@ form.addEventListener("submit", async function (e) {
 
     items.forEach(item => tlObserver.observe(item));
 })();
+
+/* ── Nav Dropdown — Mobile Accordion Toggle ── */
+(function () {
+    const dropdown = document.getElementById('nav-about-dropdown');
+    if (!dropdown) return;
+
+    const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+
+    trigger.addEventListener('click', function (e) {
+        // Only act as accordion on mobile
+        if (window.innerWidth <= 900) {
+            e.preventDefault();
+            dropdown.classList.toggle('mobile-open');
+        }
+    });
+
+    // Close dropdown when any item inside is clicked
+    dropdown.querySelectorAll('.nav-dropdown-item').forEach(item => {
+        item.addEventListener('click', () => {
+            dropdown.classList.remove('mobile-open');
+            // Also close the mobile nav
+            const navLinks = document.querySelector('.nav-links');
+            const menuIcon = document.querySelector('.mobile-menu-btn i');
+            if (navLinks) navLinks.classList.remove('active');
+            if (menuIcon) {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        });
+    });
+})();
