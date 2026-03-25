@@ -629,12 +629,20 @@ document.addEventListener('DOMContentLoaded', () => {
         contentEl.style.display = 'block';
     }
 
-    // Activate pin
+    // Activate pin (works for both old SVG pins and new image-overlay city pins)
     function activatePin(cityKey) {
+        // Old SVG pins
         document.querySelectorAll('.map-pin').forEach(p => p.classList.remove('active'));
+        // New image-overlay pins
+        document.querySelectorAll('.city-pin-wrap').forEach(p => p.classList.remove('active'));
+
         if (cityKey) {
-            const pin = document.querySelector(`.map-pin[data-city="${cityKey}"]`);
-            if (pin) pin.classList.add('active');
+            // Old SVG pin
+            const svgPin = document.querySelector(`.map-pin[data-city="${cityKey}"]`);
+            if (svgPin) svgPin.classList.add('active');
+            // New image-overlay pin
+            const imgPin = document.querySelector(`.city-pin-wrap[data-city="${cityKey}"]`);
+            if (imgPin) imgPin.classList.add('active');
         }
     }
 
@@ -662,8 +670,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ── Pin click events ──
+    // ── Pin click events (old SVG pins) ──
     document.querySelectorAll('.map-pin').forEach(pin => {
+        pin.addEventListener('click', function () {
+            const city = this.getAttribute('data-city');
+            activatePin(city);
+            showCityPanel(city);
+            // Sync dropdown label
+            const matchLi = options.querySelector(`li[data-city="${city}"]`);
+            if (matchLi) {
+                selectLabel.textContent = matchLi.textContent;
+                options.querySelectorAll('li').forEach(o => o.classList.remove('active'));
+                matchLi.classList.add('active');
+            }
+        });
+    });
+
+    // ── Pin click events (new image-overlay city pins) ──
+    document.querySelectorAll('.city-pin-wrap').forEach(pin => {
         pin.addEventListener('click', function () {
             const city = this.getAttribute('data-city');
             activatePin(city);

@@ -112,6 +112,7 @@ body {
 
 a {
   text-decoration: none;
+  
   color: inherit;
   transition: var(--transition);
 }
@@ -129,16 +130,9 @@ img {
 .client-logo img {
   width: 100%;
   height: 60px;
-  /* Adjust based on preference */
   max-width: 160px;
   object-fit: contain;
-  filter: grayscale(100%);
-  opacity: 0.7;
-  transition: all 0.3s ease;
-}
-
-.client-logo img:hover {
-  filter: grayscale(0%);
+  filter: brightness(1.1);
   opacity: 1;
 }
 
@@ -154,7 +148,7 @@ img {
 }
 
 .bg-gray {
-  background-color: var(--bg-gray);
+  /* background-color: var(--bg-gray); */
 }
 
 /* ==========================================
@@ -191,10 +185,7 @@ img {
     opacity: 1;
   }
 
-  .client-logo img:hover {
-    filter: grayscale(0%);
-    opacity: 1;
-  }
+
 
   .nav-links a:not(.nav-btn):hover {
     color: var(--text-highlight);
@@ -329,7 +320,9 @@ h5,
 h6 {
   color: var(--text-main);
   line-height: 1.2;
-  font-weight: 700;
+  font-weight: 600;
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 0.02em;
 }
 
 .section-tag {
@@ -623,7 +616,7 @@ h6 {
   color: var(--text-highlight);
   font-size: clamp(2.5rem, 8vw, 6rem);
   font-weight: 600;
-  font-family: serif;
+  font-family: 'Cormorant Garamond', serif;
   line-height: 1;
   margin-bottom: 25px;
   letter-spacing: -1px;
@@ -2021,21 +2014,13 @@ h6 {
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--text-main);
-  opacity: 0.4;
-  transition: var(--transition);
+  opacity: 1;
   white-space: nowrap;
   letter-spacing: 1px;
-
 }
 
 [data-theme="light"] .client-logo {
-  opacity: 0.6;
-}
-
-.client-logo:hover {
   opacity: 1;
-  color: var(--accent-color);
-  transform: scale(1.05);
 }
 
 @keyframes scroll-marquee {
@@ -2720,27 +2705,148 @@ h6 {
 }
 
 .map-svg-wrap {
-  flex: 0 0 400px;
+  flex: 0 0 420px;
   position: relative;
 }
 
-#india-map-svg {
+/* Image-based map container */
+.india-map-container {
+  position: relative;
   width: 100%;
-  filter: drop-shadow(0 0 30px rgba(126, 169, 110, 0.1));
+  display: block;
+  line-height: 0;
+  border-radius: 12px;
+  overflow: visible;
 }
 
-.india-outline {
-  fill: rgba(126, 169, 110, 0.08);
-  stroke: rgba(126, 169, 110, 0.4);
-  stroke-width: 1.5;
-  stroke-linejoin: round;
+.india-map-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  /* Blend the white background with our dark section */
+  mix-blend-mode: multiply;
+  filter: brightness(0.9) contrast(1.1) hue-rotate(180deg) saturate(0.8);
+  opacity: 0.92;
 }
 
-.india-srilanka {
-  fill: rgba(126, 169, 110, 0.05);
+/* ── India Map Image Container ── */
+.india-map-container {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+  line-height: 0;
 }
 
-/* Pins */
+.india-map-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 0 30px rgba(126, 169, 110, 0.2));
+  border-radius: 12px;
+}
+
+/* Pins Overlay */
+.map-pins-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Individual city pin wrapper */
+.city-pin-wrap {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  pointer-events: all;
+  z-index: 10;
+}
+
+/* The visual dot + ripple */
+.city-pin-marker {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pin-dot-main {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #7ea96e;
+  border: 2px solid rgba(255,255,255,0.5);
+  box-shadow: 0 0 6px rgba(126,169,110,0.8);
+  position: relative;
+  z-index: 2;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.pin-ripple {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(126,169,110,0.25);
+  animation: rippleAnim 2s infinite ease-out;
+  z-index: 1;
+}
+
+/* City label */
+.city-pin-label {
+  margin-top: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.75);
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: rgba(0,0,0,0.5);
+  padding: 2px 5px;
+  border-radius: 4px;
+  pointer-events: none;
+  transition: color 0.3s;
+}
+
+/* ── ACTIVE (selected from dropdown) = RED ── */
+.city-pin-wrap.active .pin-dot-main {
+  background: #ff3b30;
+  box-shadow: 0 0 12px rgba(255,59,48,0.9);
+  transform: scale(1.4);
+  border-color: rgba(255,255,255,0.8);
+}
+
+.city-pin-wrap.active .pin-ripple {
+  background: rgba(255,59,48,0.3);
+  animation: rippleAnimRed 1.5s infinite ease-out;
+}
+
+.city-pin-wrap.active .city-pin-label {
+  color: #ff6b6b;
+  background: rgba(255,59,48,0.2);
+}
+
+/* ── Ripple animations ── */
+@keyframes rippleAnim {
+  0%   { transform: scale(0.6); opacity: 0.8; }
+  70%  { transform: scale(2.2); opacity: 0.1; }
+  100% { transform: scale(0.6); opacity: 0; }
+}
+
+@keyframes rippleAnimRed {
+  0%   { transform: scale(0.6); opacity: 0.9; }
+  70%  { transform: scale(2.8); opacity: 0.1; }
+  100% { transform: scale(0.6); opacity: 0; }
+}
+
+/* Old SVG pin styles (kept for fallback) */
 .map-pin {
   cursor: pointer;
 }
@@ -2773,22 +2879,40 @@ h6 {
   filter: drop-shadow(0 0 8px #b5e39a);
 }
 
-@keyframes pinPulse {
-  0% {
-    opacity: 0.7;
-    r: 10;
-  }
-
-  65% {
-    opacity: 0.1;
-    r: 22;
-  }
-
-  100% {
-    opacity: 0;
-    r: 10;
-  }
+/* RED active state when city is selected from dropdown */
+.map-pin.active .pin-core {
+  fill: rgba(255, 59, 48, 0.4) !important;
+  stroke: rgba(255, 59, 48, 0.7) !important;
 }
+.map-pin.active .pin-dot {
+  fill: #ff3b30 !important;
+  filter: drop-shadow(0 0 10px rgba(255,59,48,0.9)) !important;
+}
+.map-pin.active .pin-pulse {
+  fill: rgba(255, 59, 48, 0.18) !important;
+}
+
+/* City name label on SVG map */
+.pin-label {
+  fill: rgba(255, 255, 255, 0.85);
+  font-size: 8px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.3px;
+  text-anchor: start;
+  pointer-events: none;
+}
+
+.map-pin.active .pin-label {
+  fill: #ff8080;
+}
+
+@keyframes pinPulse {
+  0%   { opacity: 0.7; r: 10; }
+  65%  { opacity: 0.1; r: 22; }
+  100% { opacity: 0;   r: 10; }
+}
+
 
 /* Project Panel */
 .map-project-panel {
