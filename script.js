@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         highway: {
             title: "Highway & Bridge Construction",
-            image: "https://images.unsplash.com/photo-1510673398445-94f476ef2cbc?q=80&w=1000&auto=format&fit=crop",
+            image: "homeSlider/9th.png",
             desc: "Our primary expertise lies in the end-to-end execution of massive highway and bridge projects. We bring decades of engineering prowess to tackle challenging terrains, ensuring that every mile we lay is built for safety, efficiency, and longevity.",
             features: [
                 { title: "Expressway Networks", text: "High-speed corridors designed with modern safety barriers and advanced drainage systems." },
@@ -264,25 +264,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = modalData[id];
 
                 if (data) {
+                    // Update Title and Desc in the fixed header
+                    const titleEl = document.getElementById('service-modal-title');
+                    const descEl = document.getElementById('service-modal-desc');
+                    if(titleEl) titleEl.innerText = data.title;
+                    if(descEl) descEl.innerText = data.desc;
+
                     // Build features HTML
                     let featuresHtml = '';
                     data.features.forEach(feat => {
                         featuresHtml += `
                             <div class="modal-feature-item">
-                                <h4>${feat.title}</h4>
-                                <p>${feat.text}</p>
+                                <div class="feat-dot"></div>
+                                <div class="feat-info">
+                                    <h4>${feat.title}</h4>
+                                    <p>${feat.text}</p>
+                                </div>
                             </div>
                         `;
                     });
 
-                    // Inject HTML
+                    // Inject Main Body (Image and Features Grid)
                     modalBody.innerHTML = `
-                        <img src="${data.image}" alt="${data.title}" class="modal-image">
-                        <h2 class="modal-title">${data.title}</h2>
-                        <p class="modal-desc">${data.desc}</p>
-                        <h3 style="color: var(--text-highlight); margin-bottom: 15px;">Key Competencies</h3>
-                        <div class="modal-features">
-                            ${featuresHtml}
+                        <div class="service-modal-main">
+                             <div class="service-image-wrap">
+                                <img src="${data.image}" alt="${data.title}" class="modal-image">
+                             </div>
+                             <div class="service-competencies">
+                                <h3 class="competency-title">CORE COMPETENCIES</h3>
+                                <div class="modal-features-grid">
+                                    ${featuresHtml}
+                                </div>
+                             </div>
                         </div>
                     `;
 
@@ -382,40 +395,69 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
-    // 9. Project Modal Logic
+    // 9. Modern Project Modal & Lightbox Logic
     const projectModal = document.getElementById("project-modal");
     const closeProjectBtn = document.getElementById("close-project-modal");
+    const projectGallery = document.getElementById("modal-project-gallery");
     const viewButtons = document.querySelectorAll(".pcard");
+
+    // Lightbox Elements
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const lightboxClose = document.getElementById("lightbox-close");
+    const lightboxPrev = document.getElementById("lightbox-prev");
+    const lightboxNext = document.getElementById("lightbox-next");
+
+    let currentGalleryImages = [];
+    let currentLightboxIndex = 0;
 
     if (projectModal && viewButtons.length > 0) {
 
         viewButtons.forEach(card => {
             card.addEventListener("click", (e) => {
-
                 // Extract data from card attributes
                 const title = card.getAttribute("data-title") || "Project Details";
-                const client = card.getAttribute("data-client") || "";
-                const amount = card.getAttribute("data-amount") || "";
-                const status = card.getAttribute("data-status") || "Completed";
-                const location = card.getAttribute("data-location") || "";
                 const desc = card.getAttribute("data-desc") || "";
-                const imgSrc = card.querySelector("img") ? card.querySelector("img").src : "";
-                const badgeEl = card.querySelector(".pcard-badge");
-                const sector = badgeEl ? badgeEl.innerText : "Project";
-
-                // Inject into modal
+                const mainImg = card.querySelector("img") ? card.querySelector("img").src : "";
+                
+                // Set Header Content
                 document.getElementById("modal-project-title").innerText = title;
-                document.getElementById("modal-project-client").innerText = client;
-                document.getElementById("modal-project-amount").innerText = amount;
-                document.getElementById("modal-project-status").innerText = status;
-                document.getElementById("modal-project-location").innerText = location;
                 document.getElementById("modal-project-desc").innerText = desc;
-                if(imgSrc) document.getElementById("modal-project-img").src = imgSrc;
-                document.getElementById("modal-project-sector").innerText = sector;
 
-                // Update status tag class
-                const statusTag = document.getElementById("modal-project-status");
-                statusTag.className = "status-tag " + ((status && status.toLowerCase().includes("progress")) ? "ongoing" : "completed");
+                // Generate Gallery images
+                let galleryImages = [];
+                const dataGallery = card.getAttribute("data-gallery");
+                
+                if (dataGallery) {
+                    galleryImages = dataGallery.split(',').map(s => s.trim());
+                } else {
+                    // Fallback to default project-specific mock gallery for demonstration
+                    galleryImages = [
+                        mainImg,
+                        "Lucknow Metro Civil Works.png",
+                        "Pune Metro Finishing Works.png",
+                        "Pune Metro Segment Transportation.png",
+                        "Lucknow Metro Casting Yard.png",
+                        "GMLR.png",
+                        "airport.png",
+                        "STP Plant.png"
+                    ];
+                }
+
+                currentGalleryImages = galleryImages.filter(src => src && src !== "undefined");
+
+                // Clear and Populate Gallery
+                projectGallery.innerHTML = "";
+                currentGalleryImages.forEach((src, index) => {
+                    const item = document.createElement("div");
+                    item.className = "gallery-item animate-on-scroll is-visible";
+                    item.innerHTML = `<img src="${src}" alt="${title} view ${index + 1}" loading="lazy">`;
+                    item.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        openLightbox(index);
+                    });
+                    projectGallery.appendChild(item);
+                });
 
                 // Open modal
                 projectModal.classList.add("active");
@@ -432,16 +474,66 @@ document.addEventListener('DOMContentLoaded', () => {
         if (closeProjectBtn) closeProjectBtn.addEventListener("click", closeModal);
 
         projectModal.addEventListener("click", (e) => {
-            if (e.target === projectModal) closeModal();
-        });
-
-        // ESC key close
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && projectModal.classList.contains("active")) {
-                closeModal();
-            }
+            if (e.target.classList.contains('modal-overlay')) closeModal();
         });
     }
+
+    // Lightbox Functionality
+    function openLightbox(index) {
+        currentLightboxIndex = index;
+        updateLightbox();
+        lightbox.classList.add("active");
+    }
+
+    function updateLightbox() {
+        const src = currentGalleryImages[currentLightboxIndex];
+        lightboxImg.src = src;
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove("active");
+    }
+
+    function nextLightbox(e) {
+        if(e) e.stopPropagation();
+        currentLightboxIndex = (currentLightboxIndex + 1) % currentGalleryImages.length;
+        updateLightbox();
+    }
+
+    function prevLightbox(e) {
+        if(e) e.stopPropagation();
+        currentLightboxIndex = (currentLightboxIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+        updateLightbox();
+    }
+
+    if (lightbox) {
+        lightboxClose.addEventListener("click", closeLightbox);
+        lightboxNext.addEventListener("click", nextLightbox);
+        lightboxPrev.addEventListener("click", prevLightbox);
+        lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox || e.target.classList.contains('lightbox-content')) closeLightbox();
+        });
+
+        // Key listeners for Lightbox
+        document.addEventListener("keydown", (e) => {
+            if (!lightbox.classList.contains("active")) return;
+            
+            if (e.key === "Escape") closeLightbox();
+            if (e.key === "ArrowRight") nextLightbox();
+            if (e.key === "ArrowLeft") prevLightbox();
+        });
+    }
+
+    // Global ESC handler (ensures closing right thing)
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            if (lightbox && lightbox.classList.contains("active")) {
+                closeLightbox();
+            } else if (projectModal && projectModal.classList.contains("active")) {
+                closeModal();
+            }
+        }
+    });
 
     // 10. Hero Image Auto-Slider
     const heroSlides = document.querySelectorAll('.hero-slide');
@@ -562,23 +654,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Show projects panel for a city
     function showCityPanel(cityKey) {
-        const emptyEl = document.getElementById('mpp-empty');
+        const panelEl = document.getElementById('map-project-panel');
         const contentEl = document.getElementById('mpp-content');
         const cityNameEl = document.getElementById('mpp-city-name');
         const countEl = document.getElementById('mpp-project-count');
         const listEl = document.getElementById('mpp-projects-list');
 
-        if (!cityKey) {
-            emptyEl.style.display = 'flex';
-            contentEl.style.display = 'none';
+        if (!cityKey || cityKey === "") {
+            panelEl.classList.remove('active');
+            if(contentEl) contentEl.style.display = 'none';
             return;
         }
 
         const projects = getProjectsByCity(cityKey);
 
         if (!projects.length) {
-            emptyEl.style.display = 'flex';
-            contentEl.style.display = 'none';
+            panelEl.classList.remove('active');
+            if(contentEl) contentEl.style.display = 'none';
             return;
         }
 
@@ -622,8 +714,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        emptyEl.style.display = 'none';
+        panelEl.classList.add('active');
         contentEl.style.display = 'block';
+
+        // Scroll to panel for better UX on smaller screens
+        panelEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     // Activate pin (works for both old SVG pins and new image-overlay city pins)

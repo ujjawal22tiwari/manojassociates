@@ -496,20 +496,83 @@ h6 {
 
 @media (max-width: 768px) {
   .logo-box {
-    height: 100px;
-    width: 120px;
-  }
-  .logo-box img {
-    height: 90px;
+    height: 90px !important; /* Slightly smaller for better balance */
     width: auto;
-    max-width: 180px;
-    margin-top: 10px;
+    margin-right: -10px;
+    display: flex;
+    align-items: center;
   }
 
-  .logo-name,.logo-sub{
-    font-size: 12px;margin-right: 10px;
-    
-     
+  .logo-box img {
+    height: 80% !important;
+    width: auto;
+  }
+
+  .logo-name {
+    font-size: 16px !important;
+    font-weight: 700;
+  }
+
+  .logo-sub {
+    font-size: 9px !important;
+  }
+
+  .navbar {
+    padding: 0 10px;
+    height: 90px !important;
+    min-height: 90px;
+    border-bottom: none !important;
+  }
+
+  .header.scrolled .navbar {
+    height: 70px !important;
+    min-height: 70px;
+  }
+
+  .header.scrolled .logo-box {
+    height: 60px !important;
+  }
+}
+
+/* Enhanced Footer Mobile Fix */
+@media (max-width: 768px) {
+  .footer .footer-top {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .footer .logo {
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .footer .logo-box {
+    height: 100px !important;
+    width: auto;
+    margin: 0 auto;
+  }
+
+  /* Force light colors in footer branding regardless of theme */
+  .footer .logo-name {
+    color: #ffffff !important;
+    font-size: 20px !important;
+    text-align: left;
+  }
+
+  .footer .logo-sub {
+    color: var(--accent-color) !important;
+    font-size: 11px !important;
+    text-align: left;
+  }
+
+  .footer-nav {
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .footer-social {
+    justify-content: center;
   }
 }
 
@@ -2770,13 +2833,12 @@ h6 {
 
 /* ===== MAP SECTION v2 ===== */
 .project-map-section {
-  padding: 90px 40px;
-  background: var(--bg-dark, #0d1f18);
-  background-color: var(--primary-color);
+  padding: 100px 5%;
+  background-color: #162C45;
   position: relative;
   overflow: hidden;
-   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .project-map-section::before {
@@ -2939,14 +3001,17 @@ h6 {
 /* Map + panel layout */
 .map-main-wrap {
   display: flex;
-  gap: 30px;
-  max-width: 1100px;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 1200px;
   margin: 0 auto;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .map-svg-wrap {
-  flex: 0 0 420px;
+  flex: 1;
+  width: 100%;
+  max-width: 720px;
   position: relative;
 }
 
@@ -3157,44 +3222,24 @@ h6 {
 
 /* Project Panel */
 .map-project-panel {
-  flex: 1;
-  min-height: 420px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(126, 169, 110, 0.15);
+  width: 100%;
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(126, 169, 110, 0.2);
   border-radius: 20px;
-  padding: 28px;
-  backdrop-filter: blur(8px);
-  display: flex;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  display: none; /* Only show when pin clicked */
   flex-direction: column;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
 }
 
-
-@media (max-width: 600px) {
-  .map-project-panel {
-      width: 100%;
-  }
+.map-project-panel.active {
+  display: flex !important;
 }
 
 .mpp-empty {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 16px;
-  color: var(--text-muted, #888);
-}
-
-.mpp-empty i {
-  font-size: 2.5rem;
-  color: rgba(126, 169, 110, 0.3);
-}
-
-.mpp-empty p {
-  font-size: 14px;
-  line-height: 1.6;
-  max-width: 200px;
+  display: none !important;
 }
 
 .mpp-header {
@@ -3832,7 +3877,7 @@ h6 {
 :root:not([data-theme="dark"]) #projects { background-color: var(--project-bg) !important; color: var(--project-txt) !important; }
 :root:not([data-theme="dark"]) .pcard { background-color: var(--project-card-bg) !important; border: 1px solid rgba(0,0,0,0.05) !important; }
 :root:not([data-theme="dark"]) #projects .section-title-lines { color: var(--project-h1) !important; }
-:root:not([data-theme="dark"]) .pcard-body h3 { color: var(--project-title) !important; }
+:root:not([data-theme="dark"]) .pcard-body h3 { color: gold  !important; }
 :root:not([data-theme="dark"]) .pcard-info-grid span, :root:not([data-theme="dark"]) .pcard-info-grid strong { color: var(--project-txt) !important; }
 :root:not([data-theme="dark"]) .pcard-info-grid { background: rgba(0,0,0,0.03) !important; }
 :root:not([data-theme="dark"]) .portfolio-tag { color: #FFFFFF !important; }
@@ -3882,3 +3927,370 @@ h6 {
 /* 10. LOGO & TEXT FIX */
 :root:not([data-theme="dark"]) .logo-name { color: #1F3A5F !important; }
 :root:not([data-theme="dark"]) .logo-sub { color: #C8A45D !important; opacity: 1 !important; }
+
+/* ==========================================
+   New Project Modal & Lightbox Styles
+========================================== */
+#project-modal {
+  background-color: var(--bg-main);
+  backdrop-filter: none;
+}
+
+.project-modal-container {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  background-color: var(--bg-main);
+  border-radius: 0;
+  overflow-y: auto;
+  position: relative;
+  padding: 100px 5% 60px;
+  box-shadow: none;
+  border: none;
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.modal-close-btn {
+  position: fixed;
+  top: 30px;
+  right: 40px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-main);
+  color: var(--text-highlight);
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2100;
+  transition: all 0.3s ease;
+  padding-bottom: 4px; /* Align X perfectly */
+}
+
+.modal-close-btn:hover {
+  background-color: var(--accent-color);
+  color: var(--bg-main);
+  border-color: var(--accent-color);
+  transform: rotate(90deg);
+}
+
+.modal-header-centered {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.modal-project-desc-wrapper {
+  max-width: 900px;
+  margin: 0 auto 50px;
+  text-align: center;
+}
+
+.modal-project-desc-wrapper p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-main);
+  opacity: 0.9;
+}
+
+/* Project Image Grid */
+.project-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+  background: var(--bg-gray);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+/* Lightbox Styles */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.98);
+  z-index: 4000; /* Higher than everything */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  backdrop-filter: blur(10px);
+}
+
+.lightbox-overlay.active {
+  display: flex !important;
+  opacity: 1;
+}
+
+.lightbox-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.lightbox-img-container {
+  max-width: 90%;
+  max-height: 85vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 85vh;
+  border-radius: 8px;
+  box-shadow: 0 0 100px rgba(0,0,0,0.8);
+  transform: scale(0.9);
+  transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  object-fit: contain;
+}
+
+.lightbox-overlay.active .lightbox-img {
+  transform: scale(1);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 4005;
+}
+
+.lightbox-close:hover {
+  background: var(--accent-color);
+  color: var(--bg-main);
+  transform: rotate(90deg);
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #fff;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 4005;
+}
+
+.lightbox-nav:hover {
+  background: var(--accent-color);
+  color: var(--bg-main);
+  border-color: var(--accent-color);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-prev { left: 40px; }
+.lightbox-next { right: 40px; }
+
+.lightbox-counter {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.5);
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+/* Lightbox Animation */
+@keyframes lbFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 1024px) {
+  .lightbox-nav {
+    width: 55px;
+    height: 55px;
+    font-size: 1.4rem;
+  }
+  .lightbox-prev { left: 20px; }
+  .lightbox-next { right: 20px; }
+}
+
+@media (max-width: 768px) {
+  .project-modal-container {
+    padding: 60px 20px 40px;
+  }
+  .project-gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  .lightbox-nav {
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+  .lightbox-counter {
+    bottom: 20px;
+  }
+}
+
+/* =============================================
+   MODERNIZED SERVICE MODAL STYLES
+============================================= */
+.service-details-content {
+  padding: 0 40px 60px;
+  max-height: calc(90vh - 180px); /* Adjust based on fixed header height */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color) transparent;
+}
+
+.service-modal-main {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.service-image-wrap {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.1);
+  position: sticky;
+  top: 0;
+}
+
+.service-image-wrap img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+}
+
+.competency-title {
+  font-size: 0.85rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  margin-bottom: 30px;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(126, 169, 110, 0.2);
+  padding-bottom: 15px;
+  display: inline-block;
+}
+
+.modal-features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+.modal-feature-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 24px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.modal-feature-item:hover {
+  background: rgba(126, 169, 110, 0.05);
+  border-color: rgba(126, 169, 110, 0.2);
+  transform: translateX(5px);
+}
+
+.feat-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  margin-top: 8px;
+  box-shadow: 0 0 10px var(--accent-color);
+  flex-shrink: 0;
+}
+
+.feat-info h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.feat-info p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Response for Service Modal */
+@media (max-width: 900px) {
+  .service-modal-main {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .service-image-wrap {
+    position: static;
+  }
+  
+  .service-image-wrap img {
+    aspect-ratio: 16 / 9;
+  }
+  
+  .service-details-content {
+    padding: 0 20px 40px;
+  }
+}
+
