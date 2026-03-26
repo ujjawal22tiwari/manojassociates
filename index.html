@@ -97,7 +97,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=12">
 
     <!-- Sitemap reference -->
     <link rel="sitemap" type="application/xml" href="/sitemap.xml">
@@ -114,10 +114,10 @@
     <header class="header">
         <div class="container navbar">
             <a href="#" class="logo">
-                <div class="logo-box"><img loading="eager" src="clients/manoj_associates_160x60.png"></div>
+                <div class="logo-box"><img loading="eager" src="homeSlider/logo.png"></div> 
                 <div class="logo-text">
-                    <!-- <span class="logo-name">Manoj Associates </span>
-                    <span class="logo-sub">Construction Excellence</span> -->
+                     <span class="logo-name">Manoj Associates </span> 
+                     <span class="logo-sub">Construction Excellence</span>
                 </div>
             </a>
             <button class="mobile-menu-btn" aria-label="Toggle menu">
@@ -153,7 +153,7 @@
                             <span>Our Journey</span>
                         </a>
 
-                       
+
                         </a>
                     </div>
                 </div>
@@ -181,7 +181,7 @@
                 <div class="hero-actions">
                     <a href="#projects" class="btn btn-primary">EXPLORE PROJECTS <i
                             class="fa-solid fa-arrow-right"></i></a>
-                    <a href="#contact" class="btn btn-secondary">CONSULTATION</a>
+                    <a href="#contact" class=" btn btn-secondary con">CONSULTATION</a>
                 </div>
             </div>
         </div>
@@ -189,16 +189,18 @@
             <div class="hero-image-pane hero-slider">
                 <div class="hero-slides">
 
-                    <img loading="lazy" class="hero-slide active" src="Pune Metro Finishing Works.png" alt="Delhi Metro">
-                    <img loading="eager" class="hero-slide  " src="airport.png" alt="Lucknow Metro">
-                    <img loading="lazy" class="hero-slide" src="Pune Metro Basalt Cladding Work.png" alt="GMLR Tunnel">
-                    <img loading="lazy" class="hero-slide" src="Khadki Metro ACP Work.png" alt="Pune Metro">
+                  
+                    <img loading="eager" class="hero-slide active " src="homeSlider/9th.png" alt="Lucknow Metro">
+                    <img loading="lazy" class="hero-slide" src="homeSlider/10th.png" alt="GMLR Tunnel">
+                    <img loading="lazy" class="hero-slide" src="Pune Metro Basalt Cladding Work.png " alt="Pune Metro">
+                       <img loading="lazy" class="hero-slide " src="Pune Metro Finishing Works.png"
+                        alt="Delhi Metro">
                     <img loading="lazy" class="hero-slide" src="Gonda Hospital Infrastructure Work.png" alt="Airport">
                     <img loading="lazy" class="hero-slide" src="taj.png" alt="Taj Hotel">
                     <img loading="lazy" class="hero-slide" src="Lucknow Metro Civil Works.png" alt="Taj Hotel">
                     <img loading="lazy" class="hero-slide" src="punemetro.png" alt="Taj Hotel">
                     <img loading="lazy" class="hero-slide" src="Pune Metro Segment Transportation.png" alt="Taj Hotel">
-                    <img loading="lazy" class="hero-slide" src="homeSlider/6th.jpeg" alt="Taj Hotel">
+                    <img loading="lazy" class="hero-slide" src="Khadki Metro ACP Work.png" alt="Taj Hotel">
 
 
 
@@ -229,70 +231,31 @@
         </div>
     </section>
 
-    <!-- Client Trust Marquee -->
-    <section id="clients" class="client-marquee">
-        <div class="marquee-title">OUR CLIENTS</div>
-        <div class="marquee-container">
-            <div class="marquee-content-wrapper">
-                <div class="marquee-content">
-                    <div class="client-logo"><img loading="lazy" src="clients/AFCONS.png" alt="NHAI"></div>
-                    <div class="client-logo"><img loading="lazy" src="clients/CEMINDIA.jpg"
-                            alt="Pune IT City Metro Rail Limited">
-                    </div>
-                    <div class="client-logo"><img loading="lazy" src="clients/gulermak_160x60.png"
-                            alt="Valerio Infrastructure LLP">
-                    </div>
+    <!-- Client Trust Section (JKumar Style Grid) -->
+    <section id="clients" class="client-grid-section section">
+        <div class="container">
+            <div class="projects-center-header" style="margin-bottom: 30px;">
+                <h2 class="section-title-lines">Our Clients</h2>
+            </div>
+            <div class="text-center" style="margin-bottom: 50px;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 10px; font-weight: 600;">Trusted By Leading Companies</h3>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;"> We take pride in collaborating with some of India’s most esteemed government institutions and leading private organizations, contributing to the development of world-class infrastructure.</p>
+            </div>
 
-                    <div class="client-logo"><img loading="lazy" src="clients/jkumar_logo_white.png"
-                            alt="TATA PROJECTS"></div>
-                    <div class="client-logo"><img loading="lazy" src="clients/KPILLOGO_294_79.png"
-                            alt="Cemindia Projects Limited">
-                    </div>
-                    <div class="client-logo"><img loading="lazy" src="clients/LARSEN & TOUBRO.svg"
-                            alt="Afcons Infrastructure Limited">
-                    </div>
-                    <div class="client-logo"><img loading="lazy" src="clients/logo_160x60.png"
-                            alt="Suez India Pvt. Ltd."></div>
-                    <div class="client-logo"><img loading="lazy" src="clients/SHAPOORJI PALLORJI.svg"
-                            alt="J.Kumar-NCC (GMLR) JV">
-                    </div>
-                    <div class="client-logo"><img loading="lazy" src="clients/SUEZ.svg"
-                            alt="Larsen & Toubro Limited, Construction">
-                    </div>
-                    <div class="client-logo"><img loading="lazy" src="clients/tata_160x60.png" alt="PWD UTTAR PRADESH">
-                    </div>
-
+            <div class="client-grid-container">
+                <div class="client-grid-item"><img loading="lazy" src="clients/AFCONS.png" alt="Afcons"></div>
+                <div class="client-grid-item"><img loading="lazy" src="clients/CEMINDIA.jpg" alt="Cemindia"></div>
+                <div class="client-grid-item"><img loading="lazy" src="clients/gulermak_160x60.png" alt="Gulermak">
                 </div>
-                <!-- Duplicate for seamless scroll -->
-                <div class="marquee-content">
-                    <div class="client-logo"><img loading="lazy" src="clients/AFCONS.png" alt="NHAI"></div>
-                    <div class="client-logo"><img loading="lazy" src="clients/CEMINDIA.jpg"
-                            alt="Pune IT City Metro Rail Limited">
-                    </div>
-                    <div class="client-logo"><img loading="lazy" src="clients/gulermak_160x60.png"
-                            alt="Valerio Infrastructure LLP">
-                    </div>
-                    <!-- <div class="client-logo"><img loading="lazy" src="Mall Constructions Pvt.Ltd..png" alt="Mall Constructions Pvt.Ltd."></div> -->
-                    <div class="client-logo"><img loading="lazy" src="clients/jkumar_logo_white.png"
-                            alt="TATA PROJECTS"></div>
-                    <div class="client-logo"><img loading="lazy" src="clients/KPILLOGO_294_79.png"
-                            alt="Cemindia Projects Limited">
-                    </div>
-                    <div class="client-logo"><img loading="lazy" src="clients/LARSEN & TOUBRO.svg"
-                            alt="Afcons Infrastructure Limited">
-                    </div>
-                    <div class="client-logo"><img loading="lazy" src="clients/logo_160x60.png"
-                            alt="Suez India Pvt. Ltd."></div>
-                    <div class="client-logo"><img loading="lazy" src="clients/SHAPOORJI PALLORJI.svg"
-                            alt="J.Kumar-NCC (GMLR) JV">
-                    </div>
-                    <div class="client-logo"><img loading="lazy" src="clients/SUEZ.svg"
-                            alt="Larsen & Toubro Limited, Construction">
-                    </div>
-                    <div class="client-logo"><img loading="lazy" src="clients/tata_160x60.png" alt="PWD UTTAR PRADESH">
-                    </div>
-
+                <div class="client-grid-item"><img loading="lazy" src="clients/jkumar_logo_white.png" alt="JKumar">
                 </div>
+                <div class="client-grid-item"><img loading="lazy" src="clients/KPILLOGO_294_79.png" alt="KPTL"></div>
+                <div class="client-grid-item"><img loading="lazy" src="clients/LARSEN & TOUBRO.svg" alt="L&T"></div>
+                <div class="client-grid-item"><img loading="lazy" src="clients/logo_160x60.png" alt="Suez"></div>
+                <div class="client-grid-item"><img loading="lazy" src="clients/SHAPOORJI PALLORJI.svg" alt="Shapoorji">
+                </div>
+                <div class="client-grid-item"><img loading="lazy" src="clients/SUEZ.svg" alt="Suez"></div>
+                <div class="client-grid-item"><img loading="lazy" src="clients/tata_160x60.png" alt="TATA"></div>
             </div>
         </div>
     </section>
@@ -303,8 +266,7 @@
             <div class="about-header text-center">
                 <h2 class="section-title">About Us</h2>
                 <div class="heading-underline"></div>
-                <p class="about-subtitle">Manoj Associates - Real Estate / Builders / Contractors of construction
-                    services & other services in <span class="highlight-text">Lucknow, Uttar Pradesh.</span></p>
+                <p class="about-subtitle"> Expertise in Metro & Tunnel, Roads & Highways, and Urban Infrastructure & Transportation — Manoj Associates delivers integrated infrastructure solutions with a strong presence in Lucknow, Uttar Pradesh.</p>
             </div>
 
             <div class="about-stats-container">
@@ -313,7 +275,7 @@
                     <div class="stat-icon-wrap">
                         <i class="fa-solid fa-hand-holding-dollar"></i>
                     </div>
-                    <div class="stat-info">
+                    <div class="stat-info"> 
                         <span class="stat-label">Nature of Business</span>
                         <strong class="stat-value">Service Provider and Others</strong>
                     </div>
@@ -501,7 +463,8 @@
             <div class="text-center">
                 <span class="section-tag">Our Journey</span>
                 <h2 class="section-title">Milestones of Excellence</h2>
-                <p class="section-subtitle">From a humble beginning in Lucknow to a pan-India infrastructure powerhouse — a decade and a half of building the future.</p>
+                <p class="section-subtitle">From a humble beginning in Lucknow to a pan-India infrastructure powerhouse
+                    — a decade and a half of building the future.</p>
             </div>
 
             <div class="timeline">
@@ -512,7 +475,8 @@
                     <div class="tl-card">
                         <span class="tl-year">2009</span>
                         <h3 class="tl-title">Company Founded</h3>
-                        <p class="tl-desc">Manoj Associates established in Lucknow, Uttar Pradesh as a proprietorship firm with a vision to serve India's growing infrastructure sector.</p>
+                        <p class="tl-desc">Manoj Associates established in Lucknow, Uttar Pradesh as a proprietorship
+                            firm with a vision to serve India's growing infrastructure sector.</p>
                     </div>
                 </div>
 
@@ -522,7 +486,8 @@
                     <div class="tl-card">
                         <span class="tl-year">2012</span>
                         <h3 class="tl-title">First Metro Project</h3>
-                        <p class="tl-desc">Secured and executed civil construction works for Lucknow Metro Stations under Gulermak-Tata JV — marking our entry into metro rail infrastructure.</p>
+                        <p class="tl-desc">Secured and executed civil construction works for Lucknow Metro Stations
+                            under Gulermak-Tata JV — marking our entry into metro rail infrastructure.</p>
                     </div>
                 </div>
 
@@ -532,7 +497,8 @@
                     <div class="tl-card">
                         <span class="tl-year">2015</span>
                         <h3 class="tl-title">National Expansion</h3>
-                        <p class="tl-desc">Extended operations to Delhi and Pune, executing tunnel segment casting for Delhi Metro DC-09 and Pune Metro finishing works across multiple stations.</p>
+                        <p class="tl-desc">Extended operations to Delhi and Pune, executing tunnel segment casting for
+                            Delhi Metro DC-09 and Pune Metro finishing works across multiple stations.</p>
                     </div>
                 </div>
 
@@ -542,7 +508,8 @@
                     <div class="tl-card">
                         <span class="tl-year">2018</span>
                         <h3 class="tl-title">Tunneling Expertise</h3>
-                        <p class="tl-desc">Established deep specialization in precast tunnel segment ring casting — working on GMLR (Goregaon-Mulund Link Road) and Patna Metro projects.</p>
+                        <p class="tl-desc">Established deep specialization in precast tunnel segment ring casting —
+                            working on GMLR (Goregaon-Mulund Link Road) and Patna Metro projects.</p>
                     </div>
                 </div>
 
@@ -552,7 +519,8 @@
                     <div class="tl-card">
                         <span class="tl-year">2021</span>
                         <h3 class="tl-title">Aviation Sector Entry</h3>
-                        <p class="tl-desc">Awarded prestigious flooring contract for Noida International Airport by Tata Projects Ltd — expanding into India's booming aviation infrastructure sector.</p>
+                        <p class="tl-desc">Awarded prestigious flooring contract for Noida International Airport by Tata
+                            Projects Ltd — expanding into India's booming aviation infrastructure sector.</p>
                     </div>
                 </div>
 
@@ -562,7 +530,8 @@
                     <div class="tl-card">
                         <span class="tl-year">2023</span>
                         <h3 class="tl-title">Pan-India Presence</h3>
-                        <p class="tl-desc">Active projects in Chennai, Bhopal, Patna, Palghar, Pune and Lucknow simultaneously — cementing a true pan-India footprint across 20+ cities.</p>
+                        <p class="tl-desc">Active projects in Chennai, Bhopal, Patna, Palghar, Pune and Lucknow
+                            simultaneously — cementing a true pan-India footprint across 20+ cities.</p>
                     </div>
                 </div>
 
@@ -572,7 +541,8 @@
                     <div class="tl-card tl-card-accent">
                         <span class="tl-year">2025</span>
                         <h3 class="tl-title">20Cr+ Turnover & Growing</h3>
-                        <p class="tl-desc">Achieved annual turnover of 20Cr+ with 50+ landmark projects executed. Continuing to build the arteries of modern India with unwavering commitment.</p>
+                        <p class="tl-desc">Achieved annual turnover of 20Cr+ with 50+ landmark projects executed.
+                            Continuing to build the arteries of modern India with unwavering commitment.</p>
                     </div>
                 </div>
 
@@ -580,642 +550,113 @@
         </div>
     </section>
 
-    <!-- Projects Section (Dropdown Filter) -->
+    <!-- Projects Section (Pill Filter) -->
     <section id="projects" class="portfolio section animate-on-scroll">
         <div class="container">
-            <div class="portfolio-header">
-                <div class="portfolio-tag-area">
-                    <div class="portfolio-line"></div>
-                    <span class="portfolio-tag">Our Portfolio</span>
-                </div>
-                <div class="portfolio-controls">
-                    <h2 class="portfolio-title">Landmark Projects</h2>
+            <div class="projects-center-header">
+                <h2 class="section-title-lines">Our Projects</h2>
+            </div>
 
-                    <!-- Custom Modern Dropdown -->
-                    <div class="project-filter-dropdown" id="project-dropdown">
-                        <button class="dropdown-trigger">
-                            <span id="selected-category">Civil Infrastructure</span>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li data-filter="all">All Projects</li>
-                            <li data-filter="architectural">Architectural & Finishing Works</li>
-                            <li data-filter="metro">Metro Rail Infrastructure</li>
-                            <li data-filter="tunnel">Tunnel Segment Casting</li>
-                            <li data-filter="casting">Casting Yard Development</li>
-                            <li data-filter="transport">Infrastructure Transportation</li>
-                            <li data-filter="civil" class="active">Civil Infrastructure</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="project-filter-pills" id="project-pills">
+                <button class="filter-pill active" data-filter="all">All</button>
+                <button class="filter-pill" data-filter="metro">Metros & Tunnel</button>
+                <button class="filter-pill" data-filter="road">Road & Highway</button>
+                <button class="filter-pill" data-filter="airport">Airports</button>
+                <button class="filter-pill" data-filter="transport">Transportation</button>
+                <button class="filter-pill" data-filter="urban">Urban Infra</button>
             </div>
 
             <div class="portfolio-grid-v2" id="projects-grid">
 
-                <!-- 1. Architectural -->
-                <!-- ----------------------project-1-------------------->
-                <div class="pcard" data-city="noida" data-sector="architectural"
-                    data-title="Noida International Airport – Flooring" data-client="Tata Projects Ltd"
-                    data-amount="₹1000.50 Lakhs" data-status="In Progress" data-location="Jewar, Uttar Pradesh"
-                    data-desc="Precision execution of Ruby Red granite polishing, leather finish stone, and Kota stone flooring across terminal areas and passenger concourses. This project demands high durability and premium finishing for one of India's largest upcoming aviation hubs.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="airport.png" alt="Noida Airport">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-
-                        </div>
-                        <span class="pcard-badge architectural">Architectural</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>Noida International Airport</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong> Tata Projects Ltd</span>
-                            <span><strong>Status:</strong> <span class="status-tag ongoing">In Progress</span></span>
-                        </div>
-                    </div>
+                <!-- 1. Metros & Tunnel -->
+                <div class="pcard" data-city="lucknow" data-sector="metro" data-title="Lucknow Metro" data-client="Lucknow Metro" data-amount="-" data-status="Completed" data-location="Lucknow, UP" data-desc="Execution of tunneling and metro station works for Lucknow Metro.">
+                    <div class="pcard-image"><img loading="lazy" src="Lucknow Metro Civil Works.png" alt="Lucknow Metro"><div class="pcard-overlay"><button class="view-details-btn">VIEW DETAILS</button></div><span class="pcard-badge metro">Metro</span></div>
+                    <!-- <div class="pcard-body"><h3>Lucknow Metro</h3><div class="pcard-info-grid"><span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span></div></div> -->
                 </div>
 
-                <!-- ----------------------project-1-------------------->
-
-
-
-
-                <!-- ----------------------project-2-------------------->
-
-                <div class="pcard" data-city="pune" data-sector="architectural"
-                    data-title="Pune Metro Multi-Station Finishing Works" data-client="Tata Projects Ltd"
-                    data-amount="₹1855.00 Lakhs" data-status="Completed" data-location="Pune Metro Stations"
-                    data-desc="Execution of comprehensive architectural and finishing works including granite flooring, cladding, ACP façade systems, glass installation and stainless steel works across multiple Pune Metro stations such as Shivaji Nagar, Civil Court (underground and elevated), Swargate, Budhwarpeth and Mandai under UGC-01 & 02 packages.The project focused on delivering high-quality structural finishing, durability and modern metro station aesthetics.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="Pune Metro Finishing Works.png" alt="Pune Metro Finishing Works">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-
-                        </div>
-                        <span class="pcard-badge architectural">Architectural</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>Pune Metro Finishing Works</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong>Gulermak - Tata Projects Limited </span>
-                            <span><strong>Status:</strong> <span class="status-tag ongoing">Completed</span></span>
-                        </div>
-                    </div>
+                <div class="pcard" data-city="pune" data-sector="metro" data-title="Pune Metro" data-client="Pune Metro" data-amount="-" data-status="Completed" data-location="Pune, Maharashtra" data-desc="Execution of tunneling and metro station works for Pune Metro.">
+                    <div class="pcard-image"><img loading="lazy" src="Pune Metro Finishing Works.png" alt="Pune Metro"><div class="pcard-overlay"><button class="view-details-btn">VIEW DETAILS</button></div><span class="pcard-badge metro">Metro</span></div>
+                    <!-- <div class="pcard-body"><h3>Pune Metro</h3><div class="pcard-info-grid"><span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span></div></div> -->
                 </div>
 
-                <!-- ----------------------project-2-------------------->
-
-
-                <!-- ----------------------project-3-------------------->
-
-                <div class="pcard" data-city="pune" data-sector="architectural"
-                    data-title="Pune Metro Basalt Cladding Work" data-client="Tata Projects Ltd"
-                    data-amount="₹500.00 Lakhs" data-status="Completed"
-                    data-location="Shivaji Nagar Metro Station, Pune"
-                    data-desc="Execution of basalt stone cladding and miscellaneous finishing works at Shivaji Nagar Entry and Exit area under Pune Metro Project UGC-01. The project focused on durable façade finishing and high-quality architectural detailing for metro infrastructure.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="Pune Metro Basalt Cladding Work.png" alt="Noida Airport">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-
-                        </div>
-                        <span class="pcard-badge architectural">Architectural</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>Pune Metro Basalt Cladding Work</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong>Gulermak - Tata Projects Limited (Pune Metro Joint
-                                Venture)</span>
-                            <span><strong>Status:</strong> <span class="status-tag ongoing">Completed</span></span>
-                        </div>
-                    </div>
+                <div class="pcard" data-city="chennai" data-sector="metro" data-title="Chennai Metro" data-client="Chennai Metro" data-amount="-" data-status="In Progress" data-location="Chennai, Tamil Nadu" data-desc="Execution of tunneling and metro station works for Chennai Metro.">
+                    <div class="pcard-image"><img loading="lazy" src="Work order for Segment Casting work for Chennai Metro Project – TU-01 & UG-06.png" alt="Chennai Metro"><div class="pcard-overlay"><button class="view-details-btn">VIEW DETAILS</button></div><span class="pcard-badge metro">Metro</span></div>
+                    <!-- <div class="pcard-body"><h3>Chennai Metro</h3><div class="pcard-info-grid"><span><strong>Status:</strong> <span class="status-tag ongoing">In Progress</span></span></div></div> -->
                 </div>
 
-                <!-- ----------------------project-3-------------------->
-
-
-
-                <!-- ----------------------project-4-------------------->
-
-                <div class="pcard" data-city="pune" data-sector="architectural"
-                    data-title=" Supply and installation of ACP cladding at Khadki Metro Station, Pune."
-                    data-client="Tata Projects Ltd" data-amount="₹144.00 Lakhs" data-status="Completed"
-                    data-location="Khadki Metro Station, Pune"
-                    data-desc="Execution of supply and fixing of Aluminum Composite Panel (ACP) cladding at Khadki Metro Station, Pune. The project involved high-quality façade installation to enhance durability, safety and modern architectural appearance of the metro station.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="Khadki Metro ACP Work.png" alt="Khadki Metro ACP Work">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-
-                        </div>
-                        <span class="pcard-badge architectural">Architectural</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>Khadki Metro ACP Work</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong>Mall Constructions Pvt. Ltd.</span>
-                            <span><strong>Status:</strong> <span class="status-tag ongoing">Completed</span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- ----------------------project-4-------------------->
-
-
-
-                <!-- ----------------------project-5-------------------->
-
-                <div class="pcard" data-city="pune" data-sector="architectural"
-                    data-title="Granite flooring, ACP cladding, glass and steel works across multiple Pune Metro stations."
-                    data-client="Tata Projects Ltd" data-amount="₹1855.00 Lakhs" data-status="Completed"
-                    data-location="Pune Metro Stations (Multiple Locations)"
-                    data-desc="Execution of large-scale architectural and finishing works including granite flooring, cladding, ACP façade systems, glass installation and stainless steel works across multiple Pune Metro stations such as Shivaji Nagar, Civil Court (UG & Elevated), Swargate, Budhwarpeth and Mandai under UGC-01 & 02 packages.The project focused on delivering high-quality finishing, structural durability and modern metro infrastructure aesthetics.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="punemetro.png" alt="Noida Airport">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-
-                        </div>
-                        <span class="pcard-badge architectural">Architectural</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3> Pune Metro Finishing Works</h3>
-                        <div class="pcard-info-grid">
-
-                            <span><strong>Client:</strong>Gulermak - Tata Projects Limited (Pune Metro JV)</span>
-                            <span><strong>Status:</strong> <span class="status-tag ongoing">Completed</span></span>
-                        </div>
-                    </div>
+                <div class="pcard" data-city="delhi" data-sector="metro" data-title="Delhi Metro" data-client="Delhi Metro" data-amount="-" data-status="Completed" data-location="Delhi NCR" data-desc="Execution of tunneling and metro station works for Delhi Metro.">
+                    <div class="pcard-image"><img loading="lazy" src="homeSlider/3rdimg.jpeg" alt="Delhi Metro"><div class="pcard-overlay"><button class="view-details-btn">VIEW DETAILS</button></div><span class="pcard-badge metro">Metro</span></div>
+                    <!-- <div class="pcard-body"><h3>Delhi Metro</h3><div class="pcard-info-grid"><span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span></div></div> -->
                 </div>
 
-                <!-- ----------------------project-5-------------------->
-
-
-
-                <!-- ----------------------project-6-------------------->
-
-                <div class="pcard" data-city="gonda" data-sector="architectural"
-                    data-title="Civil, electrical and infrastructure work for Tata-assisted isolation wards at Gonda Hospital."
-                    data-client="Tata Projects Ltd" data-amount="₹187.00 Lakhs" data-status="Completed"
-                    data-location="Gonda Hospital, Uttar Pradesh"
-                    data-desc="Execution of civil, architectural, electrical, ELV and PHE works for the creation and upgradation of Tata-assisted isolation and quarantine wards at Gonda Hospital. The project focused on rapid infrastructure development with high standards of safety, functionality and healthcare compliance.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="Gonda Hospital Infrastructure Work.png" alt="Noida Airport">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-
-                        </div>
-                        <span class="pcard-badge architectural">Architectural</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>Gonda Hospital Infrastructure Work</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong>Tata Projects </span>
-                            <span><strong>Status:</strong> <span class="status-tag ongoing">Completed</span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- ----------------------project-6-------------------->
-
-
-
-
-                <!-- ----------------------project-7-------------------->
-
-                <div class="pcard" data-city="lucknow" data-sector="Architectural"
-                    data-title="Taj Hotel Basalt Cladding" data-client="Valerio Infrastructure LLP"
-                    data-amount="₹100.00 Lakhs" data-status="In Progress" data-location="Gomti Nagar, Lucknow"
-                    data-desc="High-quality basalt stone cladding for the prestigious Taj Hotel. Our scope includes intricate façade finishing and architectural stone installation to achieve a premium aesthetic while ensuring long-term structural resilience.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="taj.png" alt="Taj Hotel">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-                        </div>
-                        <span class="pcard-badge architectural">Finishing</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>Taj Hotel Stone Cladding</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong> Valerio LLP</span>
-                            <span><strong>Status:</strong> <span class="status-tag ongoing">In Progress</span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- ----------------------project-7-------------------->
-
-
-
-                <!-- 2. Metro -->
-
-                <!-- ----------------------project-1-------------------->
-
-                <div class="pcard" data-city="lucknow" data-sector="metro"
-                    data-title="Lucknow Metro Stations, Uttar Pradesh" data-client="Gulermak-Tata JV"
-                    data-amount="₹231.77 Lakhs" data-status="Completed"
-                    data-location="Lucknow Metro Stations, Uttar Pradesh"
-                    data-desc=" Execution of civil construction works across multiple stations of the Lucknow Metro Project. The project involved structural development, site work and infrastructure execution ensuring durability, safety and high construction standards for metro rail operations.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="Lucknow Metro Civil Works.png" alt="Lucknow Metro">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-                        </div>
-                        <span class="pcard-badge metro">Metro Civil</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>Lucknow Metro Civil Works</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong>Gulermak-Tata Projects JV</span>
-                            <span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- ----------------------project-1-------------------->
-
-                <!-- ----------------------project-2-------------------->
-
-                <div class="pcard" data-city="lucknow" data-sector="metro"
-                    data-title="Road restoration work executed for Lucknow Metro infrastructure project."
-                    data-client="Gulermak-Tata JV" data-amount="₹770.00 Lakhs" data-status="Completed"
-                    data-location="Lucknow Metro Project, Uttar Pradesh"
-                    data-desc="Execution of road restoration works for the Lucknow Metro Project, ensuring reconstruction and strengthening of roads affected during metro construction. The project focused on restoring surface quality, durability and maintaining urban infrastructure standards.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="Lucknow Metro Road Restoration.png" alt="Lucknow Metro">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-                        </div>
-                        <span class="pcard-badge metro">Metro Civil</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>Lucknow Metro Road Restoration</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong>Gulermak - Tata Projects JV</span>
-                            <span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- ----------------------project-2-------------------->
-
-
-
-                <!-- ----------------------project-3-------------------->
-
-                <div class="pcard" data-city="pune" data-sector="metro"
-                    data-title="Inter-carting and transportation of concrete segment rings for Pune Metro project."
-                    data-client="Gulermak-Tata JV" data-amount="₹103.00 Lakhs" data-status="Completed"
-                    data-location="Pune Metro Project, Maharashtra"
-                    data-desc="Execution of inter-carting and transportation of precast concrete segment rings for the Pune Metro Rail Project. The work ensured timely and safe movement of tunnel segments to support metro tunneling operations and project efficiency.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="Pune Metro Segment Transportation.png" alt="Lucknow Metro">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-                        </div>
-                        <span class="pcard-badge metro">Metro Civil</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>Pune Metro Segment Transportation</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong>Gulermak - Tata Projects JV</span>
-                            <span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span>
-                        </div>
-                    </div>
+                <div class="pcard" data-city="patna" data-sector="metro" data-title="Patna Metro" data-client="Patna Metro" data-amount="-" data-status="Completed" data-location="Patna, Bihar" data-desc="Execution of tunneling and metro station works for Patna Metro.">
+                    <div class="pcard-image"><img loading="lazy" src="homeSlider/6th.jpeg" alt="Patna Metro"><div class="pcard-overlay"><button class="view-details-btn">VIEW DETAILS</button></div><span class="pcard-badge metro">Metro</span></div>
+                    <!-- <div class="pcard-body"><h3>Patna Metro</h3><div class="pcard-info-grid"><span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span></div></div> -->
                 </div>
 
-                <!-- ----------------------project-3-------------------->
-
-
-
-
-                <!-- 3. Tunnel -->
-
-                <!-- ----------------------project-1-------------------->
-
-                <div class="pcard" data-city="palghar" data-sector="tunnel"
-                    data-title="Tunnel Segment Casting – Palghar" data-client="J.Kumar-NCC(GMLR)Joint Venture"
-                    data-amount="₹957.00 Lakhs" data-status="In Progress"
-                    data-location="Manor Casting Yard, Palghar (Maharashtra)"
-                    data-desc=" Execution of tunnel segment ring casting at Manor casting yard for the GMLR (Goregaon-Mulund Link Road) Project in Palghar. The project involves precision manufacturing of precast tunnel segments to support large-scale metro tunneling operations with high quality and structural standards.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="homeSlider/2ndimg.jpeg" alt="Tunnel Casting">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-                        </div>
-                        <span class="pcard-badge tunnel">Tunneling</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>GMLR Tunnel Segment Casting</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong>J.Kumar-NCC(GMLR)Joint Venture</span>
-                            <span><strong>Status:</strong> <span class="status-tag completed">In Progress</span></span>
-                        </div>
-                    </div>
+                <div class="pcard" data-city="bhopal" data-sector="metro" data-title="Bhopal Metro" data-client="Bhopal Metro" data-amount="-" data-status="In Progress" data-location="Bhopal, MP" data-desc="Execution of tunneling and metro station works for Bhopal Metro.">
+                    <div class="pcard-image"><img loading="lazy" src="homeSlider/4thimg.jpeg" alt="Bhopal Metro"><div class="pcard-overlay"><button class="view-details-btn">VIEW DETAILS</button></div><span class="pcard-badge metro">Metro</span></div>
+                    <!-- <div class="pcard-body"><h3>Bhopal Metro</h3><div class="pcard-info-grid"><span><strong>Status:</strong> <span class="status-tag ongoing">In Progress</span></span></div></div> -->
                 </div>
 
-                <!-- ----------------------project-1-------------------->
-
-
-
-                <!-- ----------------------project-2-------------------->
-
-                <div class="pcard" data-city="bhopal" data-sector="tunnel" data-title="Bhopal Metro Segment Casting"
-                    data-client="Kalpataru Projects International Limited" data-amount="₹282.00 Lakhs"
-                    data-status="In Progress" data-location="Bhopal Casting Yard, Madhya Pradesh"
-                    data-desc="Execution of tunnel segment ring casting at Bhopal casting yard for Bhopal Metro Project BH-04. The project involves precision manufacturing of precast tunnel segments to support metro tunneling operations with high quality and structural standards.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="homeSlider/4thimg.jpeg" alt="Tunnel Casting">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-                        </div>
-                        <span class="pcard-badge tunnel">Tunneling</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>Bhopal Metro Segment Casting</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong>Kalpataru Projects International Limited</span>
-                            <span><strong>Status:</strong> <span class="status-tag completed">In Progress</span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- ----------------------project-2-------------------->
-
-
-                <!-- ----------------------project-3-------------------->
-
-                <div class="pcard" data-city="patna" data-sector="tunnel" data-title="Tunnel Casting – Patna Metro"
-                    data-client="Larsen & Toubro Limited (Construction)" data-amount="₹310.00 Lakhs"
-                    data-status="Completed" data-location="Patna Casting Yard, Bihar"
-                    data-desc="Execution of tunnel segment ring casting at Patna casting yard for Patna Metro Project PC-03. The project involved manufacturing of precast tunnel segments ensuring high precision, structural strength and quality standards for metro tunneling operations.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="homeSlider/6th.jpeg" alt="Tunnel Casting">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-                        </div>
-                        <span class="pcard-badge tunnel">Tunneling</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>Patna Metro Segment Casting</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong>Larsen & Toubro Limited</span>
-                            <span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- ----------------------project-3-------------------->
-
-
-                <!-- ----------------------project-4-------------------->
-
-                <div class="pcard" data-city="delhi" data-sector="tunnel" data-title="Delhi Metro Segment Casting"
-                    data-client="Larsen & Toubro Limited (Construction)" data-amount="₹335.00 Lakhs"
-                    data-status="Completed" data-location="Mundka Casting Yard, Delhi"
-                    data-desc="Execution of tunnel segment ring casting at Mundka casting yard for Delhi Metro Project DC-09. The project involved manufacturing high-precision precast tunnel segments ensuring durability, structural integrity and compliance with metro infrastructure standards.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="homeSlider/3rdimg.jpeg" alt="Tunnel Casting">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-                        </div>
-                        <span class="pcard-badge tunnel">Tunneling</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>Delhi Metro Segment Casting</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong>Larsen & Toubro Limited </span>
-                            <span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- ----------------------project-4-------------------->
-
-
-                <!-- ----------------------project-5-------------------->
-
-                <div class="pcard" data-city="chennai" data-sector="tunnel"
-                    data-title="Segment casting work for Chennai Metro Projects TU-01 & UG-06. "
-                    data-client="Tata Projects Limited" data-amount="₹525.00 Lakhs" data-status="In Progress"
-                    data-location="Chennai Metro Project, Tamil Nadu"
-                    data-desc="Execution of segment casting work for Chennai Metro Projects TU-01 & UG-06. The project involves manufacturing precast tunnel segments with high precision and quality to support metro tunneling operations and infrastructure development.">
-                    <div class="pcard-image">
-                        <img loading="lazy"
-                            src="Work order for Segment Casting work for Chennai Metro Project – TU-01 & UG-06.png"
-                            alt="Tunnel Casting">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-                        </div>
-                        <span class="pcard-badge tunnel">Tunneling</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>Chennai Metro Segment Casting</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong>Tata Projects </span>
-                            <span><strong>Status:</strong> <span class="status-tag completed">In Progress</span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- ----------------------project-5-------------------->
-
-
-
-
-
-
-                <!-- 4. Casting Yard -->
-                <!-- ----------------------project-1------------------->
-
-                <div class="pcard" data-city="palghar" data-sector="casting"
-                    data-title="Construction of casting yard for twin tunnel in GMLR Project, Palghar."
-                    data-client="J. Kumar - NCC (GMLR) Joint Venture" data-amount="₹500.00 Lakhs"
-                    data-status="In Progress" data-location="Palghar (GMLR Project), Maharashtra"
-                    data-desc="Construction of casting yard for twin tunnel segment production from Film City Goregaon to Khindipada (Amar Nagar), Mulund under GMLR Project, Palghar. The project supports large-scale tunnel infrastructure development with precision casting facilities and operational setup.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="GMLR.png" alt="Casting Yard">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-                        </div>
-                        <span class="pcard-badge casting">Industrial</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>GMLR Casting Yard Development</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong>J. Kumar - NCC (GMLR) Joint Venture</span>
-                            <span><strong>Status:</strong> <span class="status-tag completed">In Progress</span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- ----------------------project-1------------------->
-
-
-                <!-- ----------------------project-2------------------->
-
-                <div class="pcard" data-city="delhi" data-sector="casting"
-                    data-title="Casting yard setup work for Delhi Metro Project DC-05."
-                    data-client="Afcons Infrastructure Limited" data-amount="₹289.00 Lakhs" data-status="Completed"
-                    data-location="Delhi Metro Project, Delhi"
-                    data-desc="Execution of casting yard setup work for Delhi Metro Project DC-05. The project involved development of infrastructure and facilities required for tunnel segment production, ensuring efficient operations and high construction standards.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="Delhi Metro Casting Yard Setup.png" alt="Casting Yard">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-                        </div>
-                        <span class="pcard-badge casting">Industrial</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>Delhi Metro Casting Yard Setup</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong>Afcons Infrastructure Limited</span>
-                            <span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- ----------------------project-2------------------->
-
-
-                <!-- ----------------------project-3------------------->
-
-                <div class="pcard" data-city="delhi" data-sector="casting"
-                    data-title="Casting yard setup work for Delhi Metro Project DC-07."
-                    data-client=" Afcons Infrastructure Limited" data-amount=" ₹143.00 Lakhs" data-status="Completed"
-                    data-location="Delhi Metro Project, Delhi"
-                    data-desc="Execution of casting yard setup work for Delhi Metro Project DC-07. The project involved development of casting yard infrastructure and facilities required for tunnel segment production, ensuring efficient workflow and high construction standards.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="DC-07.png" alt="Casting Yard">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-                        </div>
-                        <span class="pcard-badge casting">Industrial</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>Delhi Metro Casting Yard Setup (DC-07)</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong> Afcons Infrastructure Limited</span>
-                            <span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- ----------------------project-3------------------->
-
-
-                <!-- ----------------------project-4------------------->
-
-                <div class="pcard" data-city="chennai" data-sector="casting"
-                    data-title="Casting yard setup work for Chennai Metro Project TU-01."
-                    data-client="Tata Projects Limited" data-amount="₹436.00 Lakhs" data-status="Completed"
-                    data-location="Chennai Metro Project, Tamil Nadu"
-                    data-desc="Execution of casting yard setup work for Chennai Metro Project TU-01. The project involved development of casting yard infrastructure and facilities required for tunnel segment production, ensuring efficient operations and high construction standards.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="Chennai Metro Casting Yard Setup.png" alt="Casting Yard">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-                        </div>
-                        <span class="pcard-badge casting">Industrial</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>Chennai Metro Casting Yard Setup</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong>Tata Projects </span>
-                            <span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- ----------------------project-4------------------->
-
-
-
-                <!-- ----------------------project-5------------------->
-
-                <div class="pcard" data-city="lucknow" data-sector="casting"
-                    data-title="Construction of casting yard for Lucknow Metro infrastructure project."
-                    data-client="Gulermak - Tata Projects Limited (Joint Venture)" data-amount="₹225.00 Lakhs"
-                    data-status="Completed" data-location=""
-                    data-desc="Construction of casting yard for the Lucknow Metro Project. The project involved development of infrastructure and facilities required for tunnel segment production, ensuring efficient operations and high construction standards for metro development.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="Lucknow Metro Casting Yard.png" alt="Casting Yard">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-                        </div>
-                        <span class="pcard-badge casting">Industrial</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>Lucknow Metro Casting Yard</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong>Gulermak - Tata Projects Limited</span>
-                            <span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- ----------------------project-5------------------->
-
-
-
-                <!-- 5. Civil -->
-                <!-- ----------------------project-1------------------->
-
-                <div class="pcard" data-city="unnao" data-sector="civil" data-title="Lucknow Station Civil Works"
-                    data-client="Shapoorji Pallonji & Company Private Limited" data-amount=" ₹38.86 Lakhs"
-                    data-status="Completed" data-location=" Unnao, Kanpur (Uttar Pradesh)"
-                    data-desc="Execution of civil construction works including Admin Building (G+1), VCB panel room, PTU unit and allied infrastructure at 15 MLD Sewage Treatment Plant (STP) in Unnao, Kanpur. The project focused on delivering high-quality civil infrastructure for water treatment and urban utility systems.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="STP Plant.png" alt="Civil Works">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-                        </div>
-                        <span class="pcard-badge civil">Civils</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>STP Plant Civil Works, Unnao </h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong>Shapoorji Pallonji & Company Private Limited</span>
-                            <span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- ----------------------project-1------------------->
-
-                <!-- ----------------------project-2------------------>
-
-                <div class="pcard" data-city="lucknow" data-sector="civil"
-                    data-title="Operation, maintenance and sewerage works for STP in Lucknow."
-                    data-client="Suez India Pvt. Ltd." data-amount="₹238.00 Lakhs" data-status="Completed"
-                    data-location="Lucknow, Uttar Pradesh"
-                    data-desc="Execution of operation and maintenance services for Sewerage Treatment Plant (STP) along with sewerage works in Lucknow. The project focused on efficient plant operations, system maintenance and ensuring proper sewage management for urban infrastructure.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="STP Operation & Maintenance, Lucknow.png" alt="Civil Works">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-                        </div>
-                        <span class="pcard-badge civil">Civils</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>STP Operation & Maintenance, Lucknow</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong>Suez India Pvt. Ltd.</span>
-                            <span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- ----------------------project-2------------------>
-
-                <!-- ----------------------project-3----------------->
-
-                <div class="pcard" data-city="gonda" data-sector="civil"
-                    data-title="Electrical and furniture work for nursing station in Covid ward at Gonda."
-                    data-client="Tata Projects" data-amount="____Lakhs" data-status="Completed"
-                    data-location="Gonda, Uttar Pradesh"
-                    data-desc="Execution of electrical and furniture works for the nursing station in Covid ward at Gonda, Uttar Pradesh under Tata Projects Limited. The project focused on creating functional healthcare infrastructure with proper electrical systems and interior setup for medical operations.">
-                    <div class="pcard-image">
-                        <img loading="lazy" src="covid_isolation_ward.png" alt="Civil Works">
-                        <div class="pcard-overlay">
-                            <button class="view-details-btn">VIEW DETAILS</button>
-                        </div>
-                        <span class="pcard-badge civil">Civils</span>
-                    </div>
-                    <div class="pcard-body">
-                        <h3>Covid Ward Electrical & Interior Work</h3>
-                        <div class="pcard-info-grid">
-                            <span><strong>Client:</strong>Tata Projects</span>
-                            <span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span>
-                        </div>
-                    </div>
+                <!-- 2. Road & Highway -->
+                <div class="pcard" data-city="palghar" data-sector="road" data-title="Goregaon Mulund Link Road" data-client="J. Kumar" data-amount="-" data-status="In Progress" data-location="Palghar, Maharashtra" data-desc="Construction works for Goregaon Mulund Link Road (GMLR).">
+                    <div class="pcard-image"><img loading="lazy" src="GMLR.png" alt="GMLR Road"><div class="pcard-overlay"><button class="view-details-btn">VIEW DETAILS</button></div><span class="pcard-badge road">Highway</span></div>
+                    <!-- <div class="pcard-body"><h3>Goregaon Mulund Link Road</h3><div class="pcard-info-grid"><span><strong>Status:</strong> <span class="status-tag ongoing">In Progress</span></span></div></div> -->
                 </div>
 
-                <!-- ----------------------project-3----------------->
+                <!-- 3. Airports -->
+                <div class="pcard" data-city="noida" data-sector="airport" data-title="Noida International Airport" data-client="Tata Projects" data-amount="-" data-status="In Progress" data-location="Jewar, UP" data-desc="Flooring and architectural works for Noida International Airport.">
+                    <div class="pcard-image"><img loading="lazy" src="airport.png" alt="Noida Airport"><div class="pcard-overlay"><button class="view-details-btn">VIEW DETAILS</button></div><span class="pcard-badge airport">Airport</span></div>
+                    <!-- <div class="pcard-body"><h3>Noida International Airport</h3><div class="pcard-info-grid"><span><strong>Client:</strong> Tata Projects</span><span><strong>Status:</strong> <span class="status-tag ongoing">In Progress</span></span></div></div> -->
+                </div>
+
+                <!-- 4. Transportation -->
+                <div class="pcard" data-city="lucknow" data-sector="transport" data-title="Lucknow Metro Segment Transportation" data-client="Tata Projects" data-amount="-" data-status="Completed" data-location="Lucknow, UP" data-desc="Tunnel segment transportation for Lucknow Metro project.">
+                    <div class="pcard-image"><img loading="lazy" src="Lucknow Metro Casting Yard.png" alt="Lucknow Transport"><div class="pcard-overlay"><button class="view-details-btn">VIEW DETAILS</button></div><span class="pcard-badge transport">Transport</span></div>
+                    <!-- <div class="pcard-body"><h3>Lucknow Metro Transport</h3><div class="pcard-info-grid"><span><strong>Type:</strong> Tunnel Segment</span></div></div> -->
+                </div>
+                
+                <div class="pcard" data-city="pune" data-sector="transport" data-title="Pune Metro Segment Transportation" data-client="Tata Projects" data-amount="-" data-status="Completed" data-location="Pune, Maharashtra" data-desc="Tunnel segment transportation for Pune Metro project.">
+                    <div class="pcard-image"><img loading="lazy" src="Pune Metro Segment Transportation.png" alt="Pune Transport"><div class="pcard-overlay"><button class="view-details-btn">VIEW DETAILS</button></div><span class="pcard-badge transport">Transport</span></div>
+                    <!-- <div class="pcard-body"><h3>Pune Metro Transport</h3><div class="pcard-info-grid"><span><strong>Type:</strong> Tunnel Segment</span></div></div> -->
+                </div>
+
+                <div class="pcard" data-city="chennai" data-sector="transport" data-title="Chennai Metro TU-01" data-client="Tata Projects" data-amount="-" data-status="In Progress" data-location="Chennai, Tamil Nadu" data-desc="Tunnel segment transportation for Chennai Metro TU-01 project.">
+                    <div class="pcard-image"><img loading="lazy" src="Chennai Metro Casting Yard Setup.png" alt="Chennai Transport"><div class="pcard-overlay"><button class="view-details-btn">VIEW DETAILS</button></div><span class="pcard-badge transport">Transport</span></div>
+                    <!-- <div class="pcard-body"><h3>Chennai Metro TU-01</h3><div class="pcard-info-grid"><span><strong>Client:</strong> Tata Projects</span></div></div> -->
+                </div>
+
+                <div class="pcard" data-city="chennai" data-sector="transport" data-title="Chennai Metro UG 01" data-client="Cemindia projects limited" data-amount="-" data-status="In Progress" data-location="Chennai, Tamil Nadu" data-desc="Tunnel segment transportation for Chennai Metro UG 01.">
+                    <div class="pcard-image"><img loading="lazy" src="Chennai Metro Casting Yard Setup.png" alt="Chennai Transport UG01"><div class="pcard-overlay"><button class="view-details-btn">VIEW DETAILS</button></div><span class="pcard-badge transport">Transport</span></div>
+                    <!-- <div class="pcard-body"><h3>Chennai Metro UG 01</h3><div class="pcard-info-grid"><span><strong>Client:</strong> Cemindia (ITD Cementation)</span></div></div> -->
+                </div>
+
+                <div class="pcard" data-city="bhopal" data-sector="transport" data-title="Bhopal Metro Segment Transportation" data-client="Tata Projects" data-amount="-" data-status="In Progress" data-location="Bhopal, MP" data-desc="Tunnel segment transportation for Bhopal Metro project.">
+                    <div class="pcard-image"><img loading="lazy" src="homeSlider/4thimg.jpeg" alt="Bhopal Transport"><div class="pcard-overlay"><button class="view-details-btn">VIEW DETAILS</button></div><span class="pcard-badge transport">Transport</span></div>
+                    <!-- <div class="pcard-body"><h3>Bhopal Metro Transport</h3><div class="pcard-info-grid"><span><strong>Type:</strong> Tunnel Segment</span></div></div> -->
+                </div>
+
+                <!-- 5. Urban Infra -->
+                <div class="pcard" data-city="unnao" data-sector="urban" data-title="STP Plant" data-client="Suez / Shapoorji" data-amount="-" data-status="Completed" data-location="UP" data-desc="Execution of civil construction works for Sewage Treatment Plant.">
+                    <div class="pcard-image"><img loading="lazy" src="STP Plant.png" alt="STP Plant"><div class="pcard-overlay"><button class="view-details-btn">VIEW DETAILS</button></div><span class="pcard-badge urban">Urban</span></div>
+                    <!-- <div class="pcard-body"><h3>STP Plant</h3><div class="pcard-info-grid"><span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span></div></div> -->
+                </div>
+
+                <div class="pcard" data-city="gonda" data-sector="urban" data-title="Gonda COVID Hospital" data-client="Tata Projects" data-amount="-" data-status="Completed" data-location="Gonda, UP" data-desc="Infrastructure and civil works for COVID isolation wards at Gonda hospital.">
+                    <div class="pcard-image"><img loading="lazy" src="covid_isolation_ward.png" alt="Gonda Hospital"><div class="pcard-overlay"><button class="view-details-btn">VIEW DETAILS</button></div><span class="pcard-badge urban">Urban</span></div>
+                    <!-- <div class="pcard-body"><h3>Gonda COVID Hospital</h3><div class="pcard-info-grid"><span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span></div></div> -->
+                </div>
+
+                <div class="pcard" data-city="lucknow" data-sector="urban" data-title="Nawabganj Bird Sanctuary" data-client="Government" data-amount="-" data-status="Completed" data-location="UP" data-desc="Urban infrastructure and development works at Nawabganj Bird Sanctuary.">
+                    <div class="pcard-image"><img loading="lazy" src="homeSlider/2ndimg.jpeg" alt="Nawabganj"><div class="pcard-overlay"><button class="view-details-btn">VIEW DETAILS</button></div><span class="pcard-badge urban">Urban</span></div>
+                    <!-- <div class="pcard-body"><h3>Nawabganj Bird Sanctuary</h3><div class="pcard-info-grid"><span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span></div></div> -->
+                </div>
+
+                <div class="pcard" data-city="lucknow" data-sector="urban" data-title="Dudhwa National Park" data-client="Government" data-amount="-" data-status="Completed" data-location="UP" data-desc="Infrastructure execution and site development works at Dudhwa National Park.">
+                    <div class="pcard-image"><img loading="lazy" src="homeSlider/3rdimg.jpeg" alt="Dudhwa"><div class="pcard-overlay"><button class="view-details-btn">VIEW DETAILS</button></div><span class="pcard-badge urban">Urban</span></div>
+                    <!-- <div class="pcard-body"><h3>Dudhwa National Park</h3><div class="pcard-info-grid"><span><strong>Status:</strong> <span class="status-tag completed">Completed</span></span></div></div> -->
+                </div>
 
             </div>
         </div>
@@ -1398,7 +839,7 @@
 
 
     <!-- Team Section -->
-    <section id="team" class="team section">
+    <section id="team" class="team section" >
         <div class="container">
             <div class="section-header text-center">
                 <span class="section-tag">Our Founder</span>
@@ -1581,9 +1022,9 @@
             <div class="footer-top animate-on-scroll">
                 <div class="footer-brand">
                     <a href="#" class="logo">
-                        <div class="logo-box"><img loading="lazy" src="newlogo.png"></div>
+                        <div class="logo-box"><img loading="lazy" src="homeSlider/logo.png"></div>
                         <div class="logo-text">
-                            <!-- <span class="logo-name"> Manoj Associates</span> -->
+                            <span class="logo-name"> Manoj Associates</span>
                         </div>
                     </a>
                 </div>
@@ -1676,7 +1117,7 @@
     </button>
 
     <!-- Scripts -->
-    <script src="script.js"></script>
+    <script src="script.js?v=2"></script>
 </body>
 
 </html>

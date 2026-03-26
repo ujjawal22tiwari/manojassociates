@@ -33,28 +33,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggleBtn = document.getElementById('theme-toggle');
     const themeIcon = themeToggleBtn.querySelector('i');
 
-    // Check local storage for theme preference
-    const currentTheme = localStorage.getItem('theme') || 'dark';
+    // Check local storage for theme preference, default to light
+    const currentTheme = localStorage.getItem('theme') || 'light';
 
-    if (currentTheme === 'light') {
-        document.documentElement.setAttribute('data-theme', 'light');
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
         themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
+        themeIcon.classList.add('fa-sun'); // Show sun icon when in dark mode
     }
 
     themeToggleBtn.addEventListener('click', () => {
-        let theme = document.documentElement.getAttribute('data-theme');
+        let theme = document.documentElement.getAttribute('data-theme') || 'light';
 
         if (theme === 'light') {
             document.documentElement.setAttribute('data-theme', 'dark');
             localStorage.setItem('theme', 'dark');
-            themeIcon.classList.remove('fa-sun');
-            themeIcon.classList.add('fa-moon');
-        } else {
-            document.documentElement.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
             themeIcon.classList.remove('fa-moon');
             themeIcon.classList.add('fa-sun');
+        } else {
+            document.documentElement.removeAttribute('data-theme'); // default is now light
+            localStorage.setItem('theme', 'light');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
         }
     });
 
@@ -317,30 +317,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 8. Custom Dropdown Filter for Projects
-    const dropdown = document.getElementById('project-dropdown');
-    if (dropdown) {
-        const trigger = dropdown.querySelector('.dropdown-trigger');
-        const triggerText = dropdown.querySelector('#selected-category');
-        const menuItems = dropdown.querySelectorAll('.dropdown-menu li');
+    // 8. Pill Button Filter for Projects (JKumar Style)
+    const pillContainer = document.getElementById('project-pills');
+    if (pillContainer) {
+        const pills = pillContainer.querySelectorAll('.filter-pill');
         const projectCards = document.querySelectorAll('.pcard');
         const noProjectsMsg = document.getElementById('no-projects-msg');
-
-        // Toggle dropdown open/close
-        trigger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            dropdown.classList.toggle('active');
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', () => {
-            dropdown.classList.remove('active');
-        });
 
         // Filter functionality
         const filterProjects = (filter) => {
             let visibleCount = 0;
-            projectCards.forEach(card => {
+            projectCards.forEach((card, index) => {
+                // Remove hidden class if used previously for pagination
+                card.classList.remove('hidden-by-show-more'); 
+                
                 const sector = card.getAttribute('data-sector');
                 const isMatch = filter === 'all' || sector === filter;
 
@@ -363,48 +353,55 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // Initialize filtering based on current active item
-        const activeItem = dropdown.querySelector('.dropdown-menu li.active');
+        const activeItem = pillContainer.querySelector('.filter-pill.active');
         if (activeItem) {
             const initialFilter = activeItem.getAttribute('data-filter');
             filterProjects(initialFilter);
         }
 
-        menuItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const filter = item.getAttribute('data-filter');
-                const filterText = item.innerText;
+        pills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                const filter = pill.getAttribute('data-filter');
 
                 // Update UI
-                triggerText.innerText = filterText;
-                menuItems.forEach(i => i.classList.remove('active'));
-                item.classList.add('active');
-                dropdown.classList.remove('active');
+                pills.forEach(i => i.classList.remove('active'));
+                pill.classList.add('active');
 
                 // Filter logic
                 filterProjects(filter);
             });
         });
+        
+        // Simple Show More handler
+        const showMoreBtn = document.getElementById('show-more-projects');
+        if (showMoreBtn) {
+            showMoreBtn.addEventListener('click', () => {
+                showMoreBtn.innerText = "All Projects Loaded";
+                showMoreBtn.classList.add('disabled');
+                showMoreBtn.style.opacity = '0.5';
+            });
+        }
     }
     // 9. Project Modal Logic
     const projectModal = document.getElementById("project-modal");
     const closeProjectBtn = document.getElementById("close-project-modal");
-    const viewButtons = document.querySelectorAll(".view-details-btn");
+    const viewButtons = document.querySelectorAll(".pcard");
 
     if (projectModal && viewButtons.length > 0) {
 
-        viewButtons.forEach(btn => {
-            btn.addEventListener("click", (e) => {
-                const card = btn.closest(".pcard");
+        viewButtons.forEach(card => {
+            card.addEventListener("click", (e) => {
 
                 // Extract data from card attributes
-                const title = card.getAttribute("data-title");
-                const client = card.getAttribute("data-client");
-                const amount = card.getAttribute("data-amount");
-                const status = card.getAttribute("data-status");
-                const location = card.getAttribute("data-location");
-                const desc = card.getAttribute("data-desc");
-                const imgSrc = card.querySelector("img").src;
-                const sector = card.querySelector(".pcard-badge").innerText;
+                const title = card.getAttribute("data-title") || "Project Details";
+                const client = card.getAttribute("data-client") || "";
+                const amount = card.getAttribute("data-amount") || "";
+                const status = card.getAttribute("data-status") || "Completed";
+                const location = card.getAttribute("data-location") || "";
+                const desc = card.getAttribute("data-desc") || "";
+                const imgSrc = card.querySelector("img") ? card.querySelector("img").src : "";
+                const badgeEl = card.querySelector(".pcard-badge");
+                const sector = badgeEl ? badgeEl.innerText : "Project";
 
                 // Inject into modal
                 document.getElementById("modal-project-title").innerText = title;
@@ -413,12 +410,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById("modal-project-status").innerText = status;
                 document.getElementById("modal-project-location").innerText = location;
                 document.getElementById("modal-project-desc").innerText = desc;
-                document.getElementById("modal-project-img").src = imgSrc;
+                if(imgSrc) document.getElementById("modal-project-img").src = imgSrc;
                 document.getElementById("modal-project-sector").innerText = sector;
 
                 // Update status tag class
                 const statusTag = document.getElementById("modal-project-status");
-                statusTag.className = "status-tag " + (status.toLowerCase().includes("progress") ? "ongoing" : "completed");
+                statusTag.className = "status-tag " + ((status && status.toLowerCase().includes("progress")) ? "ongoing" : "completed");
 
                 // Open modal
                 projectModal.classList.add("active");
