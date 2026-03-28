@@ -384,7 +384,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 filterProjects(filter);
             });
         });
-        
+
+        // Mobile override: Default to "airport" if on small screen
+        if (pillContainer && window.innerWidth <= 768) {
+            const airportPill = pillContainer.querySelector('.filter-pill[data-filter="airport"]');
+            if (airportPill) {
+                pills.forEach(i => i.classList.remove('active'));
+                airportPill.classList.add('active');
+                filterProjects('airport');
+            }
+        }
+
         // Simple Show More handler
         const showMoreBtn = document.getElementById('show-more-projects');
         if (showMoreBtn) {
@@ -535,64 +545,60 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 10. Hero Image Auto-Slider
-    const heroSlides = document.querySelectorAll('.hero-slide');
-    const heroDots = document.querySelectorAll('.hero-slider-dots .dot');
-    let currentSlide = 0;
+    // 10. Hero Image Slider (Horizontal Slide Effect)
+    const slides = document.querySelectorAll('.hero-slide');
+    const sliderTrack = document.getElementById('hero-slider-track');
+    const dots = document.querySelectorAll('.hero-slider-dots .dot');
 
-    if (heroSlides.length > 0) {
-        const showSlide = (index) => {
-            heroSlides.forEach(slide => slide.classList.remove('active'));
-            heroDots.forEach(dot => dot.classList.remove('active'));
+    if (slides.length && sliderTrack) {
+        let currentSlide = 0;
 
-            heroSlides[index].classList.add('active');
-            heroDots[index].classList.add('active');
+        const updateSlider = (index) => {
             currentSlide = index;
+            sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Sync dots
+            if (dots.length) {
+                dots.forEach(d => d.classList.remove('active'));
+                dots[currentSlide].classList.add('active');
+            }
         };
 
-        const nextSlide = () => {
-            const next = (currentSlide + 1) % heroSlides.length;
-            showSlide(next);
-        };
+        const slideInterval = setInterval(() => {
+            let next = (currentSlide + 1) % slides.length;
+            updateSlider(next);
+        }, 5000);
 
-        // Auto slide every 4 seconds
-        let slideInterval = setInterval(nextSlide, 4000);
-
-        // Dot click interactions
-        heroDots.forEach((dot, index) => {
+        // Dot clicks
+        dots.forEach((dot, i) => {
             dot.addEventListener('click', () => {
                 clearInterval(slideInterval);
-                showSlide(index);
-                slideInterval = setInterval(nextSlide, 4000); // restart timer
+                updateSlider(i);
             });
         });
     }
-    // 11. Mobile Touch Support for Project Card Overlays
-    // On touch devices, tap a card image area to reveal the overlay button
-    const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
 
+    // 11. Mobile Touch Support for Project Card Overlays
+    const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
     if (isTouchDevice()) {
         const allPcards = document.querySelectorAll('.pcard');
         let currentlyOpenCard = null;
 
         allPcards.forEach(card => {
             const imageArea = card.querySelector('.pcard-image');
-            if (!imageArea) return;
-
-            imageArea.addEventListener('touchstart', (e) => {
-                // Let VIEW DETAILS button tap go through normally
-                if (e.target.closest('.view-details-btn')) return;
-
-                e.preventDefault();
-                if (currentlyOpenCard && currentlyOpenCard !== card) {
-                    currentlyOpenCard.classList.remove('touch-active');
-                }
-                card.classList.toggle('touch-active');
-                currentlyOpenCard = card.classList.contains('touch-active') ? card : null;
-            }, { passive: false });
+            if (imageArea) {
+                imageArea.addEventListener('touchstart', (e) => {
+                    if (e.target.closest('.view-details-btn')) return;
+                    e.preventDefault();
+                    if (currentlyOpenCard && currentlyOpenCard !== card) {
+                        currentlyOpenCard.classList.remove('touch-active');
+                    }
+                    card.classList.toggle('touch-active');
+                    currentlyOpenCard = card.classList.contains('touch-active') ? card : null;
+                }, { passive: false });
+            }
         });
 
-        // Tap outside any card → close overlay
         document.addEventListener('touchstart', (e) => {
             if (!e.target.closest('.pcard') && currentlyOpenCard) {
                 currentlyOpenCard.classList.remove('touch-active');
@@ -600,211 +606,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
 });
 
-
-
-
-
-(function () {
-    // City display names
-    const cityLabels = {
-        lucknow: 'Lucknow, Uttar Pradesh',
-        noida: 'Noida / Jewar, UP',
-        gonda: 'Gonda, Uttar Pradesh',
-        delhi: 'Delhi NCR',
-        pune: 'Pune, Maharashtra',
-        palghar: 'Palghar, Maharashtra',
-        bhopal: 'Bhopal, Madhya Pradesh',
-        patna: 'Patna, Bihar',
-        chennai: 'Chennai, Tamil Nadu'
-    };
-
-    // Gather all pcards by city at runtime (trusts data-city attribute)
-    function getProjectsByCity(cityKey) {
-        const all = document.querySelectorAll(`.pcard[data-city="${cityKey}"]`);
-        return Array.from(all).map(card => ({
-            title: (card.getAttribute('data-title') || '').trim(),
-            client: (card.getAttribute('data-client') || '').trim(),
-            status: (card.getAttribute('data-status') || '').trim(),
-            sector: (card.getAttribute('data-sector') || '').trim(),
-            el: card
-        }));
-    }
-
-    // Open existing project modal using the card's VIEW DETAILS btn
-    function openProjectModal(cardEl) {
-        // First reset all filters to "all" so the card is visible
-        const dropdown = document.getElementById('project-dropdown');
-        if (dropdown) {
-            const allItem = dropdown.querySelector('.dropdown-menu li[data-filter="all"]');
-            if (allItem) allItem.click();
-        }
-        // Find and click the view-details btn on that card
-        const btn = cardEl.querySelector('.view-details-btn');
-        if (btn) btn.click();
-        // Scroll to projects section so user can see context
-        const projectsSection = document.getElementById('projects');
-        if (projectsSection) {
-            projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            setTimeout(() => { if (btn) btn.click(); }, 600);
-        }
-    }
-
-    // Show projects panel for a city
-    function showCityPanel(cityKey) {
-        const panelEl = document.getElementById('map-project-panel');
-        const contentEl = document.getElementById('mpp-content');
-        const cityNameEl = document.getElementById('mpp-city-name');
-        const countEl = document.getElementById('mpp-project-count');
-        const listEl = document.getElementById('mpp-projects-list');
-
-        if (!cityKey || cityKey === "") {
-            panelEl.classList.remove('active');
-            if(contentEl) contentEl.style.display = 'none';
-            return;
-        }
-
-        const projects = getProjectsByCity(cityKey);
-
-        if (!projects.length) {
-            panelEl.classList.remove('active');
-            if(contentEl) contentEl.style.display = 'none';
-            return;
-        }
-
-        cityNameEl.textContent = cityLabels[cityKey] || cityKey;
-        countEl.textContent = `${projects.length} Project${projects.length > 1 ? 's' : ''}`;
-
-        // Sector icon map
-        const sectorIcons = {
-            metro: 'fa-train-subway',
-            tunnel: 'fa-circle-dot',
-            casting: 'fa-industry',
-            architectural: 'fa-building-columns',
-            civil: 'fa-hard-hat',
-            transport: 'fa-truck'
-        };
-
-        listEl.innerHTML = projects.map((p, i) => {
-            const statusClass = p.status.toLowerCase().includes('progress') ? 'ongoing' : 'completed';
-            const statusLabel = p.status.toLowerCase().includes('progress') ? 'In Progress' : 'Completed';
-            const icon = sectorIcons[p.sector.toLowerCase()] || 'fa-folder-open';
-            return `
-                    <button class="mpp-project-btn" data-proj-index="${i}" data-city="${cityKey}">
-                        <div class="mpp-proj-icon"><i class="fa-solid ${icon}"></i></div>
-                        <div class="mpp-proj-info">
-                            <div class="mpp-proj-title">${p.title || 'Project Details'}</div>
-                            <div class="mpp-proj-meta">${p.client || ''}</div>
-                        </div>
-                        <span class="mpp-proj-status ${statusClass}">${statusLabel}</span>
-                        <i class="fa-solid fa-chevron-right mpp-proj-arrow"></i>
-                    </button>
-                `;
-        }).join('');
-
-        // Attach click handlers
-        listEl.querySelectorAll('.mpp-project-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const idx = parseInt(btn.getAttribute('data-proj-index'));
-                const city = btn.getAttribute('data-city');
-                const projs = getProjectsByCity(city);
-                if (projs[idx]) openProjectModal(projs[idx].el);
-            });
-        });
-
-        panelEl.classList.add('active');
-        contentEl.style.display = 'block';
-
-        // Scroll to panel for better UX on smaller screens
-        panelEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    // Activate pin (works for both old SVG pins and new image-overlay city pins)
-    function activatePin(cityKey) {
-        // Old SVG pins
-        document.querySelectorAll('.map-pin').forEach(p => p.classList.remove('active'));
-        // New image-overlay pins
-        document.querySelectorAll('.city-pin-wrap').forEach(p => p.classList.remove('active'));
-
-        if (cityKey) {
-            // Old SVG pin
-            const svgPin = document.querySelector(`.map-pin[data-city="${cityKey}"]`);
-            if (svgPin) svgPin.classList.add('active');
-            // New image-overlay pin
-            const imgPin = document.querySelector(`.city-pin-wrap[data-city="${cityKey}"]`);
-            if (imgPin) imgPin.classList.add('active');
-        }
-    }
-
-    // ── Custom dropdown ──
-    const customSelect = document.getElementById('map-custom-select');
-    const trigger = document.getElementById('map-select-trigger');
-    const selectLabel = document.getElementById('map-select-label');
-    const options = document.getElementById('map-select-options');
-
-    trigger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        customSelect.classList.toggle('open');
-    });
-    document.addEventListener('click', () => customSelect.classList.remove('open'));
-
-    options.querySelectorAll('li').forEach(li => {
-        li.addEventListener('click', () => {
-            const city = li.getAttribute('data-city');
-            selectLabel.textContent = li.textContent;
-            options.querySelectorAll('li').forEach(o => o.classList.remove('active'));
-            li.classList.add('active');
-            customSelect.classList.remove('open');
-            activatePin(city);
-            showCityPanel(city);
-        });
-    });
-
-    // ── Pin click events (old SVG pins) ──
-    document.querySelectorAll('.map-pin').forEach(pin => {
-        pin.addEventListener('click', function () {
-            const city = this.getAttribute('data-city');
-            activatePin(city);
-            showCityPanel(city);
-            // Sync dropdown label
-            const matchLi = options.querySelector(`li[data-city="${city}"]`);
-            if (matchLi) {
-                selectLabel.textContent = matchLi.textContent;
-                options.querySelectorAll('li').forEach(o => o.classList.remove('active'));
-                matchLi.classList.add('active');
-            }
-        });
-    });
-
-    // ── Pin click events (new image-overlay city pins) ──
-    document.querySelectorAll('.city-pin-wrap').forEach(pin => {
-        pin.addEventListener('click', function () {
-            const city = this.getAttribute('data-city');
-            activatePin(city);
-            showCityPanel(city);
-            // Sync dropdown label
-            const matchLi = options.querySelector(`li[data-city="${city}"]`);
-            if (matchLi) {
-                selectLabel.textContent = matchLi.textContent;
-                options.querySelectorAll('li').forEach(o => o.classList.remove('active'));
-                matchLi.classList.add('active');
-            }
-        });
-    });
-
-    // ── Close button ──
-    document.getElementById('mpp-close').addEventListener('click', () => {
-        showCityPanel(null);
-        activatePin(null);
-        selectLabel.textContent = 'All Cities';
-        options.querySelectorAll('li').forEach(o => o.classList.remove('active'));
-        const allLi = options.querySelector('li[data-city=""]');
-        if (allLi) allLi.classList.add('active');
-    });
-
-})();
+/* ── Scripts for removed Map Section have been deleted to avoid errors ── */
 
 
 
@@ -899,6 +703,18 @@ form.addEventListener("submit", async function (e) {
                 menuIcon.classList.remove('fa-times');
                 menuIcon.classList.add('fa-bars');
             }
+        });
+    });
+})();
+
+/* ── Footer Project Link Filter Trigger ── */
+(function () {
+    const footerPillLinks = document.querySelectorAll('.footer-pill-link');
+    footerPillLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            const filter = link.getAttribute('data-filter');
+            const targetPill = document.querySelector(`.filter-pill[data-filter="${filter}"]`);
+            if (targetPill) targetPill.click();
         });
     });
 })();
