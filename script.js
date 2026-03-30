@@ -20,12 +20,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Close mobile menu when a link is clicked
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            menuIcon.classList.remove('fa-times');
-            menuIcon.classList.add('fa-bars');
+    // 1. Modern Smooth Navigation & URL Cleaning
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            
+            // Handle '#' as Home root
+            if (targetId === '#') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.history.pushState(null, null, window.location.pathname);
+                return;
+            }
+
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                // Adjust position for sticky header
+                const headerOffset = 80;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+
+                // Update URL modernly without hash for #home, keep hash invisible for others if preferred
+                if (targetId === '#home') {
+                    window.history.pushState(null, null, window.location.pathname);
+                } else {
+                    // Modern pushState keeps it clean
+                    window.history.pushState(null, null, targetId);
+                }
+
+                // Close mobile menu
+                navLinks.classList.remove('active');
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
         });
     });
 
@@ -160,6 +192,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 5. Scroll Animations (Intersection Observer)
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    const tlObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('tl-visible');
+            }
+        });
+    }, { threshold: 0.2 });
+
+    timelineItems.forEach(item => tlObserver.observe(item));
+
     const fadeElements = document.querySelectorAll('.animate-on-scroll');
 
     const fadeObserver = new IntersectionObserver((entries) => {
@@ -171,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, {
         root: null,
-        threshold: 0.01,
+        threshold: 0.2,
         rootMargin: "0px 0px 50px 0px"
     });
 
@@ -228,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         aviation: {
             title: "Aviation Infrastructure",
-            image: "https://p1.pxfuel.com/preview/261/12/379/airport-runway-tarmac-plane.jpg",
+            image: "Aviation_Infrastructure.png",
             desc: "Constructing an airport requires precision that leaves no room for error. We specialize in building commercial runways, rapid-exit taxiways, and sprawling terminal facilities that adhere strictly to international aviation standards (ICAO and FAA).",
             features: [
                 { title: "Runway Construction", text: "High-grade polymer-modified bitumen layers for extreme load-bearing capacity and durability." },
@@ -238,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         urban: {
             title: "Urban & Site Development",
-            image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000&auto=format&fit=crop",
+            image: "STP Plant.png",
             desc: "Cities are the heart of human progress. We play a pivotal role in urban expansion by developing essential civil infrastructure, including massive storm-water systems, utility tunnels, and foundational work for smart cities.",
             features: [
                 { title: "Utility Tunnels", text: "Highly integrated underground corridors for power, telecommunications, and city-wide water supply." },
@@ -267,8 +310,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Update Title and Desc in the fixed header
                     const titleEl = document.getElementById('service-modal-title');
                     const descEl = document.getElementById('service-modal-desc');
-                    if(titleEl) titleEl.innerText = data.title;
-                    if(descEl) descEl.innerText = data.desc;
+                    if (titleEl) titleEl.innerText = data.title;
+                    if (descEl) descEl.innerText = data.desc;
 
                     // Build features HTML
                     let featuresHtml = '';
@@ -332,216 +375,175 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 8. Pill Button Filter for Projects (JKumar Style)
     const pillContainer = document.getElementById('project-pills');
+    const projectModal = document.getElementById("project-modal");
+    const closeProjectBtn = document.getElementById("close-project-modal");
+    const projectGallery = document.getElementById("modal-project-gallery");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+
+    let currentGalleryImages = [];
+    let currentLightboxIndex = 0;
+
+    const closeModal = () => {
+        if (projectModal) {
+            projectModal.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+    };
+
+    const openLightbox = (index) => {
+        currentLightboxIndex = index;
+        if (lb && lbImg) {
+            lbImg.src = currentGalleryImages[currentLightboxIndex];
+            lb.classList.add("active");
+        }
+    };
+
     if (pillContainer) {
         const pills = pillContainer.querySelectorAll('.filter-pill');
-        const projectCards = document.querySelectorAll('.pcard');
-        const noProjectsMsg = document.getElementById('no-projects-msg');
+        const projectCards = Array.from(document.querySelectorAll('.pcard'));
+        const showMoreBtnWrap = document.querySelector('.show-more-projects-wrap');
+        const showMoreBtn = document.querySelector('.btn-show-more');
 
-        // Filter functionality
+        let currentFilter = 'all';
+        let isShowingAll = false;
+
         const filterProjects = (filter) => {
-            let visibleCount = 0;
-            projectCards.forEach((card, index) => {
-                // Remove hidden class if used previously for pagination
-                card.classList.remove('hidden-by-show-more'); 
-                
+            currentFilter = filter;
+            let matchCount = 0;
+
+            projectCards.forEach((card) => {
                 const sector = card.getAttribute('data-sector');
-                const isMatch = filter === 'all' || sector === filter;
+                const isMatch = (filter === 'all' || sector === filter);
 
                 if (isMatch) {
-                    card.style.display = 'flex';
-                    // Trigger a small entry animation
-                    card.style.animation = 'none';
-                    void card.offsetWidth; // force reflow
-                    card.style.animation = 'pcardFadeIn 0.5s ease forwards';
-                    visibleCount++;
+                    matchCount++;
+                    if (filter === 'all' && !isShowingAll && matchCount > 6) {
+                        card.style.display = 'none';
+                    } else {
+                        card.style.display = 'flex';
+                        card.style.animation = 'none';
+                        void card.offsetWidth;
+                        card.style.animation = 'pcardFadeIn 0.5s ease forwards';
+                    }
                 } else {
                     card.style.display = 'none';
                 }
             });
 
-            // Handle no results
-            if (noProjectsMsg) {
-                noProjectsMsg.style.display = visibleCount === 0 ? 'block' : 'none';
+            if (filter === 'all' && !isShowingAll && projectCards.length > 6) {
+                if (showMoreBtnWrap) showMoreBtnWrap.style.display = 'flex';
+            } else {
+                if (showMoreBtnWrap) showMoreBtnWrap.style.display = 'none';
             }
         };
-
-        // Initialize filtering based on current active item
-        const activeItem = pillContainer.querySelector('.filter-pill.active');
-        if (activeItem) {
-            const initialFilter = activeItem.getAttribute('data-filter');
-            filterProjects(initialFilter);
-        }
 
         pills.forEach(pill => {
             pill.addEventListener('click', () => {
                 const filter = pill.getAttribute('data-filter');
-
-                // Update UI
-                pills.forEach(i => i.classList.remove('active'));
+                pills.forEach(p => p.classList.remove('active'));
                 pill.classList.add('active');
-
-                // Filter logic
                 filterProjects(filter);
             });
         });
 
-        // Mobile override: Default to "airport" if on small screen
-        if (pillContainer && window.innerWidth <= 768) {
-            const airportPill = pillContainer.querySelector('.filter-pill[data-filter="airport"]');
-            if (airportPill) {
-                pills.forEach(i => i.classList.remove('active'));
-                airportPill.classList.add('active');
-                filterProjects('airport');
-            }
-        }
+        filterProjects('all');
 
-        // Simple Show More handler
-        const showMoreBtn = document.getElementById('show-more-projects');
         if (showMoreBtn) {
-            showMoreBtn.addEventListener('click', () => {
-                showMoreBtn.innerText = "All Projects Loaded";
-                showMoreBtn.classList.add('disabled');
-                showMoreBtn.style.opacity = '0.5';
-            });
+            showMoreBtn.onclick = () => {
+                isShowingAll = true;
+                filterProjects(currentFilter);
+            };
         }
-    }
-    // 9. Modern Project Modal & Lightbox Logic
-    const projectModal = document.getElementById("project-modal");
-    const closeProjectBtn = document.getElementById("close-project-modal");
-    const projectGallery = document.getElementById("modal-project-gallery");
-    const viewButtons = document.querySelectorAll(".pcard");
 
-    // Lightbox Elements
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightbox-img");
-    const lightboxClose = document.getElementById("lightbox-close");
-    const lightboxPrev = document.getElementById("lightbox-prev");
-    const lightboxNext = document.getElementById("lightbox-next");
-
-    let currentGalleryImages = [];
-    let currentLightboxIndex = 0;
-
-    if (projectModal && viewButtons.length > 0) {
-
-        viewButtons.forEach(card => {
-            card.addEventListener("click", (e) => {
-                // Extract data from card attributes
+        document.addEventListener('click', (e) => {
+            const card = e.target.closest('.pcard');
+            if (card) {
                 const title = card.getAttribute("data-title") || "Project Details";
                 const desc = card.getAttribute("data-desc") || "";
                 const mainImg = card.querySelector("img") ? card.querySelector("img").src : "";
-                
-                // Set Header Content
+
                 document.getElementById("modal-project-title").innerText = title;
                 document.getElementById("modal-project-desc").innerText = desc;
 
-                // Generate Gallery images
                 let galleryImages = [];
                 const dataGallery = card.getAttribute("data-gallery");
-                
                 if (dataGallery) {
                     galleryImages = dataGallery.split(',').map(s => s.trim());
                 } else {
-                    // Fallback to default project-specific mock gallery for demonstration
-                    galleryImages = [
-                        mainImg,
-                        "Lucknow Metro Civil Works.png",
-                        "Pune Metro Finishing Works.png",
-                        "Pune Metro Segment Transportation.png",
-                        "Lucknow Metro Casting Yard.png",
-                        "GMLR.png",
-                        "airport.png",
-                        "STP Plant.png"
-                    ];
+                    galleryImages = [mainImg];
                 }
 
                 currentGalleryImages = galleryImages.filter(src => src && src !== "undefined");
-
-                // Clear and Populate Gallery
                 projectGallery.innerHTML = "";
                 currentGalleryImages.forEach((src, index) => {
                     const item = document.createElement("div");
-                    item.className = "gallery-item animate-on-scroll is-visible";
-                    item.innerHTML = `<img src="${src}" alt="${title} view ${index + 1}" loading="lazy">`;
-                    item.addEventListener("click", (e) => {
-                        e.stopPropagation();
+                    item.className = "gallery-item";
+                    item.innerHTML = `<img src="${src}" alt="view ${index + 1}">`;
+                    item.onclick = (ev) => {
+                        ev.stopPropagation();
                         openLightbox(index);
-                    });
+                    };
                     projectGallery.appendChild(item);
                 });
 
-                // Open modal
                 projectModal.classList.add("active");
-                document.body.style.overflow = "hidden"; // Prevent scroll
-            });
+                document.body.style.overflow = "hidden";
+            }
         });
+    }
 
-        // Close logic
-        const closeModal = () => {
+    if (closeProjectBtn) closeProjectBtn.onclick = closeModal;
+    // --- Project Modal Functions ---
+    const closePModal = () => {
+        if (projectModal) {
             projectModal.classList.remove("active");
             document.body.style.overflow = "";
+        }
+    };
+
+    if (closeProjectBtn) closeProjectBtn.onclick = closePModal;
+    if (projectModal) {
+        projectModal.onclick = (e) => {
+            if (e.target.classList.contains('modal-overlay')) closePModal();
         };
-
-        if (closeProjectBtn) closeProjectBtn.addEventListener("click", closeModal);
-
-        projectModal.addEventListener("click", (e) => {
-            if (e.target.classList.contains('modal-overlay')) closeModal();
-        });
     }
 
-    // Lightbox Functionality
-    function openLightbox(index) {
-        currentLightboxIndex = index;
-        updateLightbox();
-        lightbox.classList.add("active");
+    // --- Lightbox Logic ---
+    const lb = document.getElementById("lightbox");
+    const lbClose = document.getElementById("lightbox-close");
+    const lbPrev = document.getElementById("lightbox-prev");
+    const lbNext = document.getElementById("lightbox-next");
+    const lbImg = document.getElementById("lightbox-img");
+
+    const closeLB = () => { if (lb) lb.classList.remove("active"); };
+    const nextLB = (e) => {
+        if (e) e.stopPropagation();
+        if (currentGalleryImages.length > 0) {
+            currentLightboxIndex = (currentLightboxIndex + 1) % currentGalleryImages.length;
+            if (lbImg) lbImg.src = currentGalleryImages[currentLightboxIndex];
+        }
+    };
+    const prevLB = (e) => {
+        if (e) e.stopPropagation();
+        if (currentGalleryImages.length > 0) {
+            currentLightboxIndex = (currentLightboxIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+            if (lbImg) lbImg.src = currentGalleryImages[currentLightboxIndex];
+        }
+    };
+
+    if (lb) {
+        if (lbClose) lbClose.onclick = closeLB;
+        if (lbNext) lbNext.onclick = nextLB;
+        if (lbPrev) lbPrev.onclick = prevLB;
+        lb.onclick = (e) => { if (e.target === lb) closeLB(); };
     }
 
-    function updateLightbox() {
-        const src = currentGalleryImages[currentLightboxIndex];
-        lightboxImg.src = src;
-    }
-
-    function closeLightbox() {
-        lightbox.classList.remove("active");
-    }
-
-    function nextLightbox(e) {
-        if(e) e.stopPropagation();
-        currentLightboxIndex = (currentLightboxIndex + 1) % currentGalleryImages.length;
-        updateLightbox();
-    }
-
-    function prevLightbox(e) {
-        if(e) e.stopPropagation();
-        currentLightboxIndex = (currentLightboxIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
-        updateLightbox();
-    }
-
-    if (lightbox) {
-        lightboxClose.addEventListener("click", closeLightbox);
-        lightboxNext.addEventListener("click", nextLightbox);
-        lightboxPrev.addEventListener("click", prevLightbox);
-        lightbox.addEventListener("click", (e) => {
-            if (e.target === lightbox || e.target.classList.contains('lightbox-content')) closeLightbox();
-        });
-
-        // Key listeners for Lightbox
-        document.addEventListener("keydown", (e) => {
-            if (!lightbox.classList.contains("active")) return;
-            
-            if (e.key === "Escape") closeLightbox();
-            if (e.key === "ArrowRight") nextLightbox();
-            if (e.key === "ArrowLeft") prevLightbox();
-        });
-    }
-
-    // Global ESC handler (ensures closing right thing)
     document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-            if (lightbox && lightbox.classList.contains("active")) {
-                closeLightbox();
-            } else if (projectModal && projectModal.classList.contains("active")) {
-                closeModal();
-            }
+        if (lb && lb.classList.contains("active")) {
+            if (e.key === "Escape") closeLB();
+            if (e.key === "ArrowRight") nextLB();
+            if (e.key === "ArrowLeft") prevLB();
         }
     });
 
@@ -556,7 +558,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const updateSlider = (index) => {
             currentSlide = index;
             sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-            
+
             // Sync dots
             if (dots.length) {
                 dots.forEach(d => d.classList.remove('active'));
@@ -578,34 +580,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 11. Mobile Touch Support for Project Card Overlays
-    const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
-    if (isTouchDevice()) {
-        const allPcards = document.querySelectorAll('.pcard');
-        let currentlyOpenCard = null;
+    // 11. Mobile Touch Support - Simplified for full card click
+    // Note: The main click listener on .pcard already handles both mobile and desktop.
+    // Removed old touchstart preventDefault that was blocking modals.
 
-        allPcards.forEach(card => {
-            const imageArea = card.querySelector('.pcard-image');
-            if (imageArea) {
-                imageArea.addEventListener('touchstart', (e) => {
-                    if (e.target.closest('.view-details-btn')) return;
-                    e.preventDefault();
-                    if (currentlyOpenCard && currentlyOpenCard !== card) {
-                        currentlyOpenCard.classList.remove('touch-active');
-                    }
-                    card.classList.toggle('touch-active');
-                    currentlyOpenCard = card.classList.contains('touch-active') ? card : null;
-                }, { passive: false });
-            }
-        });
-
-        document.addEventListener('touchstart', (e) => {
-            if (!e.target.closest('.pcard') && currentlyOpenCard) {
-                currentlyOpenCard.classList.remove('touch-active');
-                currentlyOpenCard = null;
-            }
-        });
-    }
 });
 
 /* ── Scripts for removed Map Section have been deleted to avoid errors ── */
@@ -629,8 +607,8 @@ form.addEventListener("submit", async function (e) {
     });
 
     if (res.ok) {
-        alert("✅ Inquiry Submitted Successfully!");
-        form.reset();
+        // alert("✅ Inquiry Submitted Successfully!");
+        // form.reset();
     } else {
         alert("❌ Something went wrong!");
     }
