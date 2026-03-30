@@ -20,7 +20,7 @@
 }
 
 .header.scrolled {
-  background-color: var(--header-bg) !important;
+  background-color: #000000 !important;
   backdrop-filter: blur(10px);
 }
 
