@@ -20,12 +20,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Mobile Dropdown Toggle Logic
+    const navDropdowns = document.querySelectorAll('.nav-dropdown');
+    navDropdowns.forEach(dropdown => {
+        const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+        trigger.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                e.preventDefault(); // Prevent jump for "About" link
+                dropdown.classList.toggle('mobile-open');
+            }
+        });
+    });
+
     // 1. Modern Smooth Navigation & URL Cleaning
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
-            
+
             // Handle '#' as Home root
             if (targetId === '#') {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -413,6 +425,12 @@ document.addEventListener('DOMContentLoaded', () => {
             let matchCount = 0;
 
             projectCards.forEach((card) => {
+                // Explicitly hide projects marked as data-hidden
+                if (card.getAttribute('data-hidden') === 'true') {
+                    card.style.display = 'none';
+                    return;
+                }
+
                 const sector = card.getAttribute('data-sector');
                 const isMatch = (filter === 'all' || sector === filter);
 
@@ -456,39 +474,134 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         }
 
+        // --- Helper for Robust Title Matching ---
+        const findCardByTitle = (title, allCards) => {
+            const clean = (t) => t.toLowerCase().replace(/[^a-z0-9]/g, '');
+            const targetClean = clean(title);
+            return allCards.find(c => clean(c.getAttribute('data-title') || '') === targetClean);
+        };
+
+        // --- New Modal Opening Function with "Swapping" Logic ---
+        window.openModalWithCard = (card) => {
+            if (!card) return;
+            const title = card.getAttribute("data-title") || "Project Details";
+            const desc = card.getAttribute("data-desc") || "";
+            const mainImg = card.querySelector("img") ? card.querySelector("img").src : "";
+            const dataGallery = card.getAttribute("data-gallery");
+            const city = (card.getAttribute("data-city") || "").toLowerCase();
+
+            // Populate Modal Content
+            document.getElementById("modal-project-title").innerText = title;
+            document.getElementById("modal-project-desc").innerText = desc;
+
+            let galleryImages = [];
+            if (dataGallery) {
+                galleryImages = dataGallery.split(',').map(s => s.trim());
+            } else {
+                galleryImages = [mainImg];
+            }
+
+            currentGalleryImages = galleryImages.filter(src => src && src !== "undefined");
+            projectGallery.innerHTML = "";
+            currentGalleryImages.forEach((src, index) => {
+                const item = document.createElement("div");
+                item.className = "gallery-item";
+                item.innerHTML = `<img src="${src}" alt="Project View ${index + 1}">`;
+                item.onclick = (ev) => {
+                    ev.stopPropagation();
+                    openLightbox(index);
+                };
+                projectGallery.appendChild(item);
+            });
+
+            // --- Other Metro Projects (Screenshot Layout) ---
+            const otherProjectsContainer = document.getElementById("modal-other-projects-container");
+            if (otherProjectsContainer) {
+                otherProjectsContainer.innerHTML = "";
+                
+                const allCards = Array.from(document.querySelectorAll('.pcard'));
+                let relatedElements = [];
+
+                // Handle Chennai and Delhi Specifically as per User Request
+                const metroPairsChennai = ["Chennai Metro TU-01 & UG-06", "Chennai Metro UG 01"];
+                const metroPairsDelhi = ["Delhi Metro DC-05", "Delhi Metro DC-07", "Delhi Metro DC-09"];
+
+                if (metroPairsChennai.includes(title)) {
+                    relatedElements = metroPairsChennai
+                        .filter(t => t.toLowerCase() !== title.toLowerCase()) // Filter out current
+                        .map(t => findCardByTitle(t, allCards))
+                        .filter(c => c !== undefined);
+                } else if (metroPairsDelhi.includes(title)) {
+                    relatedElements = metroPairsDelhi
+                        .filter(t => t.toLowerCase() !== title.toLowerCase()) // Filter out current
+                        .map(t => findCardByTitle(t, allCards))
+                        .filter(c => c !== undefined);
+                } else if (city === "chennai") {
+                    // For Chennai non-metro projects, remove the related section entirely
+                    relatedElements = [];
+                } else {
+                    // Default logic for other cities
+                    const currentSector = card.getAttribute('data-sector');
+                    relatedElements = allCards.filter(c => {
+                        const targetCity = (c.getAttribute('data-city') || "").toLowerCase();
+                        const targetSector = c.getAttribute('data-sector');
+                        const targetTitle = c.getAttribute('data-title');
+                        
+                        return targetCity === city && 
+                               targetSector === currentSector && 
+                               targetTitle !== title;
+                    });
+                }
+
+                if (relatedElements.length > 0) {
+                    const cityName = city.charAt(0).toUpperCase() + city.slice(1);
+                    const otherHtml = `
+                        <div class="other-projects-header">
+                            <div class="line"></div>
+                            <h2 class="other-projects-title">${cityName} Metro Projects</h2>
+                            <div class="line"></div>
+                        </div>
+                        <div class="other-projects-columns">
+                            <!-- Column 1: Related Metros -->
+                            <div class="other-col">
+                                <ul class="metro-details">
+                                    ${relatedElements.map(c => `
+                                        <li class="swap-project-link" data-title="${c.getAttribute('data-title')}">
+                                            ${c.getAttribute('data-title')}
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+                    otherProjectsContainer.innerHTML = otherHtml;
+
+                    // Bind Swap Events
+                    otherProjectsContainer.querySelectorAll('.swap-project-link').forEach(link => {
+                        link.style.cursor = 'pointer';
+                        link.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const targetTitle = link.getAttribute('data-title');
+                            const targetCard = findCardByTitle(targetTitle, allCards);
+                            if (targetCard) {
+                                window.openModalWithCard(targetCard);
+                                const container = document.querySelector('.project-modal-container');
+                                if (container) container.scrollTo({ top: 0, behavior: 'smooth' });
+                            }
+                        });
+                    });
+                }
+            }
+
+            projectModal.classList.add("active");
+            document.body.style.overflow = "hidden";
+        };
+
         document.addEventListener('click', (e) => {
             const card = e.target.closest('.pcard');
             if (card) {
-                const title = card.getAttribute("data-title") || "Project Details";
-                const desc = card.getAttribute("data-desc") || "";
-                const mainImg = card.querySelector("img") ? card.querySelector("img").src : "";
-
-                document.getElementById("modal-project-title").innerText = title;
-                document.getElementById("modal-project-desc").innerText = desc;
-
-                let galleryImages = [];
-                const dataGallery = card.getAttribute("data-gallery");
-                if (dataGallery) {
-                    galleryImages = dataGallery.split(',').map(s => s.trim());
-                } else {
-                    galleryImages = [mainImg];
-                }
-
-                currentGalleryImages = galleryImages.filter(src => src && src !== "undefined");
-                projectGallery.innerHTML = "";
-                currentGalleryImages.forEach((src, index) => {
-                    const item = document.createElement("div");
-                    item.className = "gallery-item";
-                    item.innerHTML = `<img src="${src}" alt="view ${index + 1}">`;
-                    item.onclick = (ev) => {
-                        ev.stopPropagation();
-                        openLightbox(index);
-                    };
-                    projectGallery.appendChild(item);
-                });
-
-                projectModal.classList.add("active");
-                document.body.style.overflow = "hidden";
+                window.openModalWithCard(card);
             }
         });
     }

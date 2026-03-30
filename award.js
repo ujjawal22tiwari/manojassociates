@@ -36,6 +36,20 @@ if (mobileBtn) {
     mobileBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
 }
 
+// Mobile Dropdown Toggle Logic (Sync with script.js)
+const navDropdowns = document.querySelectorAll('.nav-dropdown');
+navDropdowns.forEach(dropdown => {
+    const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+    if (trigger) {
+        trigger.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                e.preventDefault(); 
+                dropdown.classList.toggle('mobile-open');
+            }
+        });
+    }
+});
+
 /* =============================================
    Sticky Header on Scroll
 ============================================= */

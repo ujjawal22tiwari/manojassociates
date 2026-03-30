@@ -24,6 +24,22 @@
   backdrop-filter: blur(10px);
 }
 
+/* Ensure navbar elements are visible over the Hero images on Awards page */
+.header:not(.scrolled) .logo-name,
+.header:not(.scrolled) .mobile-menu-btn i {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .header:not(.scrolled) .logo-name,
+[data-theme="dark"] .header:not(.scrolled) .mobile-menu-btn i {
+  color: #ffffff !important;
+}
+
+.header.scrolled .logo-name,
+.header.scrolled .mobile-menu-btn i {
+  color: #ffffff !important;
+}
+
 .slider-track {
   display: flex;
   width: 300%;

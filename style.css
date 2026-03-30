@@ -444,7 +444,7 @@ h6 {
   backdrop-filter: blur(10px);
 }
 
-.header.scrolled .nav-links a:not(.nav-btn),
+.header.scrolled .nav-links a:not(.nav-btn):not(.nav-dropdown-item),
 .header.scrolled .nav-dropdown-trigger,
 .header.scrolled .nav-chevron,
 .header.scrolled .theme-toggle-btn i {
@@ -2729,6 +2729,38 @@ h6 {
     overflow-y: auto;
   }
 
+  /* Force visible black text on mobile */
+  .nav-links a:not(.nav-btn),
+  .nav-links .nav-dropdown-trigger,
+  .nav-links .nav-dropdown-item span,
+  .nav-links .nav-dropdown-item i,
+  .nav-links .nav-chevron {
+    color: #000000 !important; /* Forces solid black for max visibility */
+  }
+
+  /* Rotate chevron on mobile when open */
+  .nav-dropdown.mobile-open .nav-chevron {
+    transform: rotate(180deg) !important;
+  }
+
+  /* Keep it readable in dark mode */
+  [data-theme="dark"] .nav-links a:not(.nav-btn),
+  [data-theme="dark"] .nav-links .nav-dropdown-trigger,
+  [data-theme="dark"] .nav-links .nav-dropdown-item span,
+  [data-theme="dark"] .nav-links .nav-dropdown-item i,
+  [data-theme="dark"] .nav-links .nav-chevron {
+    color: #ffffff !important;
+  }
+
+  /* Ensure the hamburger menu button is ALWAYS visible */
+  .mobile-menu-btn i {
+    color: var(--text-main) !important;
+  }
+
+  .header.scrolled .mobile-menu-btn i {
+    color: #ffffff !important;
+  }
+
   /* All top-level nav links on mobile */
   .nav-links>a {
     width: 100%;
@@ -3615,10 +3647,18 @@ h6 {
   align-items: center;
   gap: 10px;
   padding: 10px 18px;
-  color: var(--text-muted);
+  color: #000000 !important; /* Force black for visibility on light menu */
   font-size: 0.88rem;
   font-weight: 500;
   transition: background 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
+}
+
+[data-theme="dark"] .nav-dropdown-item {
+  color: #ffffff !important;
+}
+
+.nav-dropdown-item span {
+  color: inherit !important;
 }
 
 .nav-dropdown-item+.nav-dropdown-item {
@@ -4407,3 +4447,72 @@ h6 {
     padding: 0 20px 40px;
   }
 }
+
+.modal-other-projects {
+    margin-top: 100px;
+    padding: 60px 0;
+    background-color: var(--bg-main);
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+.modal-other-projects .other-projects-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+.modal-other-projects .other-projects-header .line {
+    height: 1.5px;
+    background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+    flex: 1;
+    max-width: 150px;
+}
+.modal-other-projects .other-projects-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    white-space: nowrap;
+    font-family: 'Poppins', sans-serif;
+}
+.modal-other-projects .other-projects-columns {
+    display: flex;
+    justify-content: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+.modal-other-projects .other-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.modal-other-projects .metro-name {
+    color: var(--accent-color);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.modal-other-projects .metro-details {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.modal-other-projects .metro-details li {
+    font-size: 0.95rem;
+    color: var(--text-main);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-weight: 600;
+}
+.modal-other-projects .metro-details li:hover {
+    color: var(--accent-color);
+    transform: translateX(5px);
+}
