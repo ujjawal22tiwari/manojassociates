@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 1. Modern Smooth Navigation & URL Cleaning
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    // 1. Modern Smooth Navigation & URL Cleaning (Excluding Mobile Dropdown Triggers)
+    document.querySelectorAll('a[href^="#"]:not(.nav-dropdown-trigger)').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');

@@ -447,7 +447,10 @@ h6 {
 .header.scrolled .nav-links a:not(.nav-btn):not(.nav-dropdown-item),
 .header.scrolled .nav-dropdown-trigger,
 .header.scrolled .nav-chevron,
-.header.scrolled .theme-toggle-btn i {
+.header.scrolled .theme-toggle-btn i,
+.header.scrolled .mobile-menu-btn i,
+.header.scrolled .logo-name,
+.header.scrolled .logo-sub {
   color: #FFFFFF !important;
 }
 
@@ -2840,6 +2843,23 @@ h6 {
   .header.scrolled .nav-links {
     top: 60px;
     height: calc(100vh - 60px);
+    background-color: #000000 !important;
+  }
+  
+  .header.scrolled .nav-links .nav-dropdown-menu {
+    background-color: #000000 !important;
+  }
+  
+  .header.scrolled .nav-links a:not(.nav-btn),
+  .header.scrolled .nav-links .nav-dropdown-trigger,
+  .header.scrolled .nav-links .nav-chevron,
+  .header.scrolled .nav-links .nav-dropdown-item span,
+  .header.scrolled .nav-links .nav-dropdown-item i {
+    color: #FFFFFF !important;
+  }
+
+  .header.scrolled .nav-links a {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
   }
 
   .nav-links.active {
@@ -4504,6 +4524,48 @@ h6 {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    align-items: center;
+}
+
+.swap-project-link {
+    font-size: 1.1rem;
+    color: var(--text-main);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.swap-project-link:hover {
+    color: var(--accent-color);
+}
+
+/* ==========================================
+   SCROLLED HEADER RECONCILIATION
+   Ensures all text is white on black background
+========================================== */
+/* Scrolled Header elements that should always be white */
+.header.scrolled .logo-name,
+.header.scrolled .logo-sub,
+.header.scrolled .nav-links a:not(.nav-btn):not(.nav-dropdown-item),
+.header.scrolled .nav-dropdown-trigger,
+.header.scrolled .nav-chevron,
+.header.scrolled .mobile-menu-btn i {
+  color: #FFFFFF !important;
+}
+
+/* On Desktop, ensure dropdown items are DARK on their white background even when scrolled */
+@media (min-width: 769px) {
+  .header.scrolled .nav-dropdown-item span,
+  .header.scrolled .nav-dropdown-item i {
+    color: var(--text-main) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .header.scrolled .nav-links {
+    background-color: #000000 !important;
+  }
 }
 .modal-other-projects .metro-details li {
     font-size: 0.95rem;

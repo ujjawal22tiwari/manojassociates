@@ -16,7 +16,7 @@
 
 /* Remove solid background to let style.css handle transparency/scroll */
 .header {
-  background-color: transparent !important;
+  background-color: var(--bg-darker) !important;
 }
 
 .header.scrolled {
@@ -24,11 +24,6 @@
   backdrop-filter: blur(10px);
 }
 
-/* Ensure navbar elements are visible over the Hero images on Awards page */
-.header:not(.scrolled) .logo-name,
-.header:not(.scrolled) .mobile-menu-btn i {
-  color: #ffffff !important;
-}
 
 [data-theme="dark"] .header:not(.scrolled) .logo-name,
 [data-theme="dark"] .header:not(.scrolled) .mobile-menu-btn i {
@@ -36,7 +31,9 @@
 }
 
 .header.scrolled .logo-name,
-.header.scrolled .mobile-menu-btn i {
+.header.scrolled .logo-sub,
+.header.scrolled .mobile-menu-btn i,
+.header.scrolled .nav-links a {
   color: #ffffff !important;
 }
 
