@@ -2478,6 +2478,8 @@ h6 {
 
 .footer-dev-credit {
   color: #ffcc00;
+  
+   
   /* Yellow from SS */
   font-weight: 700;
   text-decoration: none;
@@ -2485,7 +2487,8 @@ h6 {
 }
 
 .footer-dev-credit:hover {
-  color: #ffffff;
+  /* color: #ffffff; */
+   color: #EF7433;
 }
 
 @media (max-width: 1200px) {
@@ -4577,4 +4580,4 @@ h6 {
 .modal-other-projects .metro-details li:hover {
     color: var(--accent-color);
     transform: translateX(5px);
-}
+}
